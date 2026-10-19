@@ -1,0 +1,71 @@
+{
+  "title": "Book a grooming appointment",
+  "subtitle": "Tell us a little about your pet and we'll make sure they're ready for a comfortable grooming experience.",
+
+  "petDetails": {
+    "title": "Pet details",
+    "description": "Basic information about your pet",
+    "name": "Name",
+    "namePlaceholder": "e.g. Teddy",
+    "breed": "Breed",
+    "breedPlaceholder": "e.g. Golden Retriever",
+    "age": "Age",
+    "ageHint": "An estimate is completely fine.",
+    "agePlaceholder": "e.g. 2 years",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "size": "Size",
+    "sizePlaceholder": "Select a size",
+    "sizes": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    },
+    "weight": "Weight",
+    "weightPlaceholder": "e.g. 6",
+    "weightUnit": "kg"
+  },
+
+  "ownerDetails": {
+    "title": "Your details",
+    "description": "We'll use these details to contact you",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Your full name",
+    "phone": "Phone"
+  },
+
+  "service": {
+    "title": "Service",
+    "description": "Select the grooming option that suits your pet",
+    "haircutOnly": {
+      "title": "Haircut only",
+      "note": "NOTE: Please bathe your pet the same day or the night before."
+    },
+    "combined": {
+      "title": "Combined",
+      "description": "A complete grooming session tailored to your pet.",
+      "options": {
+        "haircut": "Haircut",
+        "bath": "Bath",
+        "deMatting": "De-matting"
+      }
+    },
+    "coatCondition": {
+      "label": "Coat condition",
+      "none": "No mats",
+      "medium": "Medium matting",
+      "heavy": "Heavy matting",
+      "felted": "Severe / felted"
+    }
+  },
+
+  "notes": {
+    "title": "Anything else?",
+    "description": "Optional notes for the groomer",
+    "placeholder": "Fears, allergies, injuries, preferences, or anything else we should know..."
+  },
+
+  "submit": "Book appointment",
+  "success": "Your appointment has been booked successfully."
+}

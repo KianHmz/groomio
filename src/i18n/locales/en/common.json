@@ -1,0 +1,34 @@
+{
+  "status": {
+    "ok": "Ok",
+    "loading": "Loading...",
+    "pleaseWait": "Please wait..."
+  },
+  "empty": {
+    "noData": "No data available",
+    "default": "Nothing to show here"
+  },
+  "actions": {
+    "back": "Back",
+    "save": "Save",
+    "delete": "Delete",
+    "update": "Update",
+    "create": "Create"
+  },
+  "messages": {
+    "success": {
+      "save": "Changes saved successfully!",
+      "delete": "Deleted successfully!",
+      "update": "Updated successfully!",
+      "create": "Created successfully!",
+      "verify": "Verified successfully!"
+    },
+    "error": {
+      "network": "Network error. Please check your connection.",
+      "server": "Something went wrong. Please try again later.",
+      "generic": "An unexpected error occurred.",
+      "notFound": "Resource not found.",
+      "unauthorized": "You are not authorized to perform this action."
+    }
+  }
+}
