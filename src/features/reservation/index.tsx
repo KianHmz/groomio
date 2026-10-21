@@ -1,7 +1,7 @@
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import MainButton from "@/components/forms/MainButton";
+import MainButton from "@/components/shared/form/MainButton";
 import {
   Card,
   CardContent,
@@ -16,9 +16,9 @@ import OwnerDetailsSection from "./sections/OwnerDetailsSection";
 import PetDetailsSection from "./sections/PetDetailsSection";
 import ServiceSection from "./sections/ServiceSection";
 import { useReservationForm } from "./useReservationForm";
-import BackButton from "@/components/common/BackButton";
-import { ROUTES } from "@/config/constants";
-import { useLocation, useNavigate } from "react-router-dom";
+import BackButton from "@/components/shared/common/BackButton";
+import { ROUTES } from "@/lib/constants";
+import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 
 const Reservation = () => {

@@ -2,9 +2,9 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react";
 
-import Field from "@/components/forms/Field";
-import Input from "@/components/forms/Input";
-import SectionHeader from "@/components/forms/SectionHeader";
+import Field from "@/components/shared/form/Field";
+import Input from "@/components/shared/form/Input";
+import SectionHeader from "@/components/shared/form/SectionHeader";
 
 import type { ReservationFormInput } from "../schema";
 

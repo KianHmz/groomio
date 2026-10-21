@@ -1,9 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import Field from "@/components/forms/Field";
-import SectionHeader from "@/components/forms/SectionHeader";
-import TextareaInput from "@/components/forms/TextareaInput";
+import Field from "@/components/shared/form/Field";
+import SectionHeader from "@/components/shared/form/SectionHeader";
+import TextareaInput from "@/components/shared/form/TextareaInput";
 
 import type { ReservationFormInput } from "../schema";
 

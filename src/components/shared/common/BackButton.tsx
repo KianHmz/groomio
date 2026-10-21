@@ -1,6 +1,6 @@
-import type { RoutePath } from "@/config/constants";
+import type { RoutePath } from "@/lib/constants";
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface BackButtonProps {
   to: RoutePath;

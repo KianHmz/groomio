@@ -1,10 +1,10 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import Field from "@/components/forms/Field";
-import Input from "@/components/forms/Input";
-import SectionHeader from "@/components/forms/SectionHeader";
-import SelectInput from "@/components/forms/SelectInput";
+import Field from "@/components/shared/form/Field";
+import Input from "@/components/shared/form/Input";
+import SectionHeader from "@/components/shared/form/SectionHeader";
+import SelectInput from "@/components/shared/form/SelectInput";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,

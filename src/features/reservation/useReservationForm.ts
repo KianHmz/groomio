@@ -5,8 +5,8 @@ import {
   type ReservationFormInput,
   type ReservationFormOutput,
 } from "./schema";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/config/constants";
+import { useNavigate } from "react-router";
+import { ROUTES } from "@/lib/constants";
 
 export const useReservationForm = (
   defaultValues?: Partial<ReservationFormInput>,

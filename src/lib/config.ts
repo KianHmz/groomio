@@ -1,4 +1,3 @@
-// Site metadata
 export const siteConfig = {
   name: "Groomio",
   description:

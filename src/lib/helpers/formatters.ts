@@ -1,5 +1,0 @@
-export const formatTime = (totalSeconds: number): string => {
-  const mins = Math.floor(totalSeconds / 60);
-  const secs = totalSeconds % 60;
-  return `${mins.toString()}:${secs.toString().padStart(2, "0")}`;
-};

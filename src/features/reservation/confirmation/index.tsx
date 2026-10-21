@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Row from "./components/Row";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
-import { ROUTES } from "@/config/constants";
+import { ROUTES } from "@/lib/constants";
 
 // const name = "Someone";
 // const phone = "+989178898878";

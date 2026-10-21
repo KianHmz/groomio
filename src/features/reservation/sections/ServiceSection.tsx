@@ -1,7 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import SectionHeader from "@/components/forms/SectionHeader";
+import SectionHeader from "@/components/shared/form/SectionHeader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
