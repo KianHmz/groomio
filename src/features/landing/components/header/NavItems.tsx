@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/config/constants";
-import { Link } from "react-router-dom";
+import { ROUTES } from "@/lib/constants";
+import { Link } from "react-router";
 
 const NavItems = () => {
   return (

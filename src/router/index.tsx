@@ -1,14 +1,11 @@
-import { ROUTES } from "@/config/constants";
+import { ROUTES } from "@/lib/constants";
 import Landing from "@/features/landing";
-import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import ReservationLayout from "@/router/ReservationLayout";
+import { lazy, Suspense } from "react";
+import { createBrowserRouter, Navigate } from "react-router";
+import { FullPageSpinner } from "@/components/common/FullPageSpinner";
 
-const PhoneVerify = lazy(() => import("@/features/otp/PhoneVerify"));
-const OtpVerify = lazy(() => import("@/features/otp/OtpVerify"));
 const Reservation = lazy(() => import("@/features/reservation"));
-const ReservationConfirmation = lazy(() => import("@/features/reservation/confirmation"),
-);
+const ReservationConfirmation = lazy(() => import("@/features/reservation/confirmation"));
 
 export const router = createBrowserRouter([
   {
@@ -16,25 +13,20 @@ export const router = createBrowserRouter([
     element: <Landing />,
   },
   {
-    element: <ReservationLayout />,
-    children: [
-      {
-        path: ROUTES.PHONE_VERIFY,
-        element: <PhoneVerify />,
-      },
-      {
-        path: ROUTES.OTP_VERIFY,
-        element: <OtpVerify />,
-      },
-      {
-        path: ROUTES.RESERVATION,
-        element: <Reservation />,
-      },
-      {
-        path: ROUTES.RESERVATION_CONFIRMATION,
-        element: <ReservationConfirmation />,
-      },
-    ],
+    path: ROUTES.RESERVATION,
+    element: (
+      <Suspense fallback={<FullPageSpinner />}>
+        <Reservation />
+      </Suspense>
+    ),
+  },
+  {
+    path: ROUTES.RESERVATION_CONFIRMATION,
+    element: (
+      <Suspense fallback={<FullPageSpinner />}>
+        <ReservationConfirmation />
+      </Suspense>
+    ),
   },
   {
     path: "*",
