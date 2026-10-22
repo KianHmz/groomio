@@ -37,13 +37,9 @@ const OwnerDetailsSection = () => {
         <Field label={t("ownerDetails.phone")} error={errors.phone?.message}>
           <div className="relative">
             <Input
-              disabled
               className="pr-11"
               {...register("phone")}
             />
-            <span className="absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-sage/20 text-sage">
-              <Check className="h-3.5 w-3.5 text-sage" strokeWidth={3} />
-            </span>
           </div>
         </Field>
       </div>

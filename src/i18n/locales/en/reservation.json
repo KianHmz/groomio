@@ -67,5 +67,11 @@
   },
 
   "submit": "Book appointment",
-  "success": "Your appointment has been booked successfully."
+  "success": "Your appointment has been booked successfully.",
+
+  "confirmation": {
+    "thankYou": "Thank you, {{name}}",
+    "description": "Your reservation request has been received. We'll call you shortly to confirm the details.",
+    "makeAnother": "Make another reservation"
+  }
 }

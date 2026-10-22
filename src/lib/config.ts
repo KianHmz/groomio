@@ -1,23 +1,16 @@
+const env = import.meta.env;
+
 export const siteConfig = {
-  name: "Groomio",
-  description:
-    "Book pet grooming appointments online with Groomio. Clients reserve in a simple public flow; our team confirms your exact date and time by SMS.",
-  url: "https://groomio.app",
-  ogImage: "https://groomio.app/og.png",
+  name: env.VITE_SITE_NAME ?? "Groomio",
+  description: env.VITE_SITE_DESCRIPTION ?? "",
+  url: env.VITE_SITE_URL ?? "http://localhost:5173",
+  ogImage: env.VITE_OG_IMAGE ?? `${env.VITE_SITE_URL}/og.png`,
   links: {
-    twitter: "https://twitter.com/myapp",
-    github: "https://github.com/myapp",
+    github: env.VITE_GITHUB_URL ?? "",
   },
-  author: "Kian Hmz",
-  keywords: [
-    "grooming",
-    "reservation",
-    "pet grooming",
-    "pet grooming appointment",
-    "book pet grooming",
-    "dog grooming booking",
-    "cat grooming booking",
-    "pet grooming reservations",
-    "grooming appointment app",
-  ],
+  author: env.VITE_AUTHOR ?? "",
+  keywords: (env.VITE_KEYWORDS ?? "")
+    .split(",")
+    .map((k: string) => k.trim())
+    .filter(Boolean),
 };

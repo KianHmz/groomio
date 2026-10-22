@@ -23,7 +23,7 @@ const NavItems = () => {
       >
         num3
       </a>
-      <Link to={ROUTES.PHONE_VERIFY}>
+      <Link to={ROUTES.RESERVATION}>
         <Button
           onClick={() => {}}
           className="font-medium bg-dark-brown hover:bg-tan hover:text-black hover:border-dark-brown transition-colors w-full md:w-auto"

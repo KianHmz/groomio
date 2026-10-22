@@ -23,6 +23,16 @@ export const ERRORS = {
 
   // Rate limiting
   TOO_MANY_REQUESTS: "Too many requests, please slow down",
+
+  // Environment variables
+  MISSING_ENV_VAR: "Missing environment variable(s)",
+
+  // Database
+  DB_RECORD_ALREADY_EXISTS: "Record already exists",
+  DB_RECORD_NOT_FOUND: "Record not found in database",
+  DB_INSERT_FAILED: "Failed to insert record",
+  DB_UPDATE_FAILED: "Failed to update record",
+  DB_DELETE_FAILED: "Failed to delete record",
 } as const;
 
 export type ErrorMessage = (typeof ERRORS)[keyof typeof ERRORS];

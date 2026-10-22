@@ -18,24 +18,11 @@ import ServiceSection from "./sections/ServiceSection";
 import { useReservationForm } from "./useReservationForm";
 import BackButton from "@/components/shared/common/BackButton";
 import { ROUTES } from "@/lib/constants";
-import { useLocation, useNavigate } from "react-router";
-import { useEffect } from "react";
 
 const Reservation = () => {
   const { t } = useTranslation(["reservation", "common"]);
 
-  const navigate = useNavigate();
-
-  const { state } = useLocation() as { state?: { phone: string } };
-  
-  // middleware
-  // useEffect(() => {
-  //   if (!state?.phone) {
-  //     navigate(ROUTES.PHONE_VERIFY, { replace: true });
-  //   }
-  // }, [state, navigate]);
-
-  const { methods, onSubmit } = useReservationForm({ phone: state?.phone });
+  const { methods, onSubmit } = useReservationForm();
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -69,17 +56,13 @@ const Reservation = () => {
             </CardContent>
 
             <CardFooter className="border-t border-dark-brown/8 bg-cream/30 py-8 mb-2">
-              {/* <MainButton
+              <MainButton
                 type="submit"
                 disabled={isSubmitting}
                 className="h-12 w-full rounded-xl"
               >
-                {t("submit")}
-              </MainButton> */}
-              {/* ----------------- TEST BTN */}
-              {/* check what will happen in useReservationForm */}
-              <MainButton type="submit">BOOK</MainButton>
-              {/* ----------------- TEST BTN */}
+                {isSubmitting ? t("common:status.pleaseWait") : t("submit")}
+              </MainButton>
             </CardFooter>
           </Card>
         </form>

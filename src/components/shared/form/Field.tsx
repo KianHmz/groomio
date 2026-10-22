@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import type { ReactNode } from "react";
-import InlineMessage from "../feedback/InlineMessage";
+import InlineMessage from "@/components/shared/common/feedback/InlineMessage";
 
 interface FieldProps {
   label: string;
