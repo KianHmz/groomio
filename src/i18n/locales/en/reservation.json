@@ -67,7 +67,8 @@
   },
 
   "submit": "Book appointment",
-  "success": "Your appointment has been booked successfully.",
+  "submitted": "Your appointment has been booked successfully.",
+  "failed": "Faild to book your appointment. Please try again.",
 
   "confirmation": {
     "thankYou": "Thank you, {{name}}",

@@ -13,22 +13,13 @@
     "save": "Save",
     "delete": "Delete",
     "update": "Update",
-    "create": "Create"
+    "insert": "Insert"
   },
-  "messages": {
-    "success": {
-      "save": "Changes saved successfully!",
-      "delete": "Deleted successfully!",
-      "update": "Updated successfully!",
-      "create": "Created successfully!",
-      "verify": "Verified successfully!"
-    },
-    "error": {
-      "network": "Network error. Please check your connection.",
-      "server": "Something went wrong. Please try again later.",
-      "generic": "An unexpected error occurred.",
-      "notFound": "Resource not found.",
-      "unauthorized": "You are not authorized to perform this action."
-    }
+  "error": {
+    "network": "Network error. Please check your connection.",
+    "server": "Something went wrong. Please try again later.",
+    "generic": "An unexpected error occurred.",
+    "notFound": "Resource not found.",
+    "unauthorized": "You are not authorized to perform this action."
   }
 }

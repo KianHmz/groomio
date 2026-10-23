@@ -5,14 +5,20 @@ import {
   type ReservationFormInput,
   type ReservationFormOutput,
 } from "./schema";
-import { useNavigate } from "react-router";
-import { ERRORS, ROUTES } from "@/lib/constants";
+import { ROUTES } from "@/lib/constants";
 import { supabase } from "@/lib/supabase";
 import { formatDateTime } from "@/lib/utils/formatters";
+import { toast } from "sonner";
+import { DATABASE } from "@/lib/constants/database";
+import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export const useReservationForm = (
   defaultValues?: Partial<ReservationFormInput>,
 ) => {
+  const { t } = useTranslation(["reservation"]);
+  const navigate = useNavigate();
+
   const methods = useForm<ReservationFormInput, unknown, ReservationFormOutput>(
     {
       resolver: zodResolver(reservationSchema),
@@ -51,10 +57,7 @@ export const useReservationForm = (
     },
   );
 
-  const navigate = useNavigate();
-
   const onSubmit = async (data: ReservationFormOutput) => {
-    console.log("Form data:", data);
     const { error } = await supabase.from("reservations").insert({
       pet_name: data.name,
       breed: data.breed,
@@ -69,16 +72,23 @@ export const useReservationForm = (
       coat_condition: data.coatCondition,
       notes: data.notes,
     });
-    if (error) throw new Error(ERRORS.DB_INSERT_FAILED, { cause: error });
-    // TODO: show a toast: error/success to the user
+
+    if (error) {
+      toast.error(t("failed"));
+      throw new Error(DATABASE.CREATE_FAILED, { cause: error });
+    }
+
+    toast.success(t("submitted"));
     methods.reset();
-    navigate(ROUTES.RESERVATION_CONFIRMATION, {
-      state: {
-        fullName: data.fullName,
-        phone: data.phone,
-        submittedAt: formatDateTime(new Date(), { calendar: "persian" }), // 'calenar' should chnage automatically based on lang-switch (en/fa)
-      },
-    });
+    setTimeout(() => {
+      navigate(ROUTES.RESERVATION_CONFIRMATION, {
+        state: {
+          fullName: data.fullName,
+          phone: data.phone,
+          submittedAt: formatDateTime(new Date(), { calendar: "persian" }), // 'calenar' should chnage automatically based on lang-switch (en/fa)
+        },
+      });
+    }, 1500);
   };
 
   return { methods, onSubmit };
