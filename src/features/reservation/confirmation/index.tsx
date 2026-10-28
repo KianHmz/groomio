@@ -18,8 +18,8 @@ const ReservationConfirmation = () => {
   const { state } = useLocation();
 
   return (
-    <main className="min-h-screen bg-cream flex items-center justify-center overflow-hidden">
-      <Card className="mx-auto w-full max-w-lg px-8 rounded-2xl shadow-xl border-0 bg-white">
+    <div>
+      <Card className="ring-0">
         {/* Icon + heading */}
         <CardHeader className="items-center text-center pt-10">
           <CardTitle className="text-3xl font-serif text-dark-brown tracking-tight">
@@ -64,7 +64,7 @@ const ReservationConfirmation = () => {
           </div>
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 };
 

@@ -32,7 +32,7 @@ const Reservation = () => {
     <div className="p-4">
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Card className="mx-auto w-full max-w-2xl px-8 rounded-2xl shadow-xl border-0 bg-white">
+          <Card className="ring-0">
             <CardHeader className="p-4 sm:p-8">
               <div className="mb-4">
                 <BackButton
