@@ -8,7 +8,7 @@ export const AdminGuard = () => {
 
   if (isLoading) return <FullPageSpinner />;
 
-  if (!user) return <Navigate to={ROUTES.LOGIN} replace />;
+  if (!user) return <Navigate to={ROUTES.AUTH.LOGIN} replace />;
 
   //   if (!user?.isAdmin) return <Navigate to={ROUTES.LANDING} replace />;
   //   OR

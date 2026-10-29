@@ -1,12 +1,18 @@
 export const ROUTES = {
   LANDING: "/",
-  RESERVATION: "/reservation",
-  RESERVATION_CONFIRMATION: "/reservation/confirmation",
 
-  LOGIN: "/login",
+  RESERVATION: {
+    FORM: "/reservation",
+    CONFIRMATION: "/reservation/confirmation",
+  },
 
-  ADMIN: "/admin",
-  ADMIN_DASHBOARD: "/admin",
+  AUTH: {
+    LOGIN: "/login",
+  },
+
+  ADMIN: {
+    HOME: "/admin",
+  },
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

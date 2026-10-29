@@ -1,37 +1,31 @@
 import { ROUTES } from "@/lib/constants";
 import Landing from "@/features/landing";
-import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate, Outlet } from "react-router";
-import { FullPageSpinner } from "@/components/shared/common/FullPageSpinner";
+import { lazy } from "react";
+import { createBrowserRouter, Navigate } from "react-router";
 import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
+import MainLayout from "@/components/shared/layout/MainLayout";
 
 const Reservation = lazy(() => import("@/features/reservation"));
 const ReservationConfirmation = lazy(
   () => import("@/features/reservation/confirmation"),
 );
 
-const RootLayout = () => (
-  <Suspense fallback={<FullPageSpinner />}>
-    <Outlet />
-  </Suspense>
-);
-
 export const router = createBrowserRouter([
   {
     // public
-    element: <RootLayout />,
+    element: <MainLayout />,
     children: [
       {
         path: ROUTES.LANDING,
         element: <Landing />,
       },
       {
-        path: ROUTES.RESERVATION,
+        path: ROUTES.RESERVATION.FORM,
         element: <Reservation />,
       },
       {
-        path: ROUTES.RESERVATION_CONFIRMATION,
+        path: ROUTES.RESERVATION.CONFIRMATION,
         element: <ReservationConfirmation />,
       },
 
@@ -39,7 +33,7 @@ export const router = createBrowserRouter([
       ...adminRoutes,
 
       // user
-      ...userRoutes,
+      // ...userRoutes,
 
       // *
       {

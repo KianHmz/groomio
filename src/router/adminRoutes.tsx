@@ -1,20 +1,22 @@
 import { ROUTES } from "@/lib/constants";
 import { AdminGuard } from "./guards/AdminGuard";
-import { Navigate } from "react-router";
 import { lazy } from "react";
+import DashboardLayout from "@/components/shared/layout/DashboardLayout";
 
 const AdminHome = lazy(() => import("@/features/admin"));
 
 export const adminRoutes = [
   {
-    path: ROUTES.ADMIN,
+    path: ROUTES.ADMIN.HOME,
     element: <AdminGuard />,
     children: [
       {
-        index: true,
-        element: <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />,
+        element: <DashboardLayout variant="admin" />,
+        children: [
+          { index: true, element: <AdminHome /> },
+          // { path: ROUTES.ADMIN.what, element: <what /> },
+        ],
       },
-      { path: ROUTES.ADMIN_DASHBOARD, element: <AdminHome /> },
     ],
   },
 ];
