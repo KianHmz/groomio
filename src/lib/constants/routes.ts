@@ -1,19 +1,25 @@
 export const ROUTES = {
   LANDING: "/",
-
   RESERVATION: {
     FORM: "/reservation",
     CONFIRMATION: "/reservation/confirmation",
   },
-
-  AUTH: {
-    LOGIN: "/login",
-  },
-
+  AUTH: { LOGIN: "/login" },
   ADMIN: {
     HOME: "/admin",
+    APPOINTMENTS: "/admin/appointments",
+    CUSTOMERS: "/admin/customers",
   },
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
-export type RoutePath = (typeof ROUTES)[RouteKey];
+
+export type RoutePath = {
+  [K in RouteKey]: (typeof ROUTES)[K] extends string
+    ? (typeof ROUTES)[K]
+    : RoutePathFromObject<(typeof ROUTES)[K]>;
+}[RouteKey];
+
+type RoutePathFromObject<T> = {
+  [K in keyof T]: T[K] extends string ? T[K] : RoutePathFromObject<T[K]>;
+}[keyof T];

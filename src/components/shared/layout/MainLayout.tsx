@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 import { Outlet } from "react-router";
-import { FullPageSpinner } from "../common/FullPageSpinner";
+import { FullPageSpinner } from "@/components/shared/common/FullPageSpinner";
 
 const MainLayout = () => {
   return (

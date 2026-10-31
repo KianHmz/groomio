@@ -23,7 +23,7 @@ const NavItems = () => {
       >
         num3
       </a>
-      <Link to={ROUTES.RESERVATION}>
+      <Link to={ROUTES.RESERVATION.FORM}>
         <Button
           onClick={() => {}}
           className="font-medium bg-dark-brown hover:bg-tan hover:text-black hover:border-dark-brown transition-colors w-full md:w-auto"

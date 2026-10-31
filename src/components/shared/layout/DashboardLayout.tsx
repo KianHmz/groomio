@@ -1,23 +1,15 @@
+import Header from "@/features/dashboard/components/Header";
+import Navigation from "@/features/dashboard/components/Navigation";
+import type { NavVariant } from "@/types";
 import { Outlet } from "react-router";
 
-const NAV_ITEMS = {
-  admin: [
-    /* admin nav */
-    'reserstion',
-    'customers',
-  ],
-  user: [
-    /* user nav */
-  ],
-};
-
-const DashboardLayout = ({ variant }: { variant: "admin" | "user" }) => (
+const DashboardLayout = ({ variant }: { variant: NavVariant }) => (
   <div className="min-h-screen">
-    {/* <Sidebar items={NAV_ITEMS[variant]} /> */}
-    <aside items={NAV_ITEMS[variant]} />
-    <main className="flex-1">
+    <Header />
+    <main className="flex-1 mb-20">
       <Outlet />
     </main>
+    <Navigation variant={variant} />
   </div>
 );
 

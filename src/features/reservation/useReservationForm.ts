@@ -81,7 +81,7 @@ export const useReservationForm = (
     toast.success(t("submitted"));
     methods.reset();
     setTimeout(() => {
-      navigate(ROUTES.RESERVATION_CONFIRMATION, {
+      navigate(ROUTES.RESERVATION.CONFIRMATION, {
         state: {
           fullName: data.fullName,
           phone: data.phone,

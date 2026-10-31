@@ -52,7 +52,7 @@ const ReservationConfirmation = () => {
 
           {/* Actions */}
           <div className="mt-16 flex flex-col gap-3">
-            <Link to={ROUTES.RESERVATION} replace>
+            <Link to={ROUTES.RESERVATION.FORM} replace>
               <Button
                 variant="ghost"
                 className="w-full text-dark-brown hover:bg-sage/20 hover:text-dark-brown h-11"

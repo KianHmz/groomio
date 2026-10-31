@@ -3,7 +3,7 @@ import { AdminGuard } from "./guards/AdminGuard";
 import { lazy } from "react";
 import DashboardLayout from "@/components/shared/layout/DashboardLayout";
 
-const AdminHome = lazy(() => import("@/features/admin"));
+const AdminHome = lazy(() => import("@/features/dashboard/admin"));
 
 export const adminRoutes = [
   {

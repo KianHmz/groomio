@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "home": "Home",
+    "appointments": "Appointments",
+    "customers": "Customers"
+  },
+    "pendingRequests": {
+    "title": "Bookings need your attention",
+    "description": "{{count}} requests are waiting for approval."
+  }
+}
