@@ -4,8 +4,13 @@
     "appointments": "Appointments",
     "customers": "Customers"
   },
-    "pendingRequests": {
+  "pendingRequests": {
     "title": "Bookings need your attention",
     "description": "{{count}} requests are waiting for approval."
+  },
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
   }
 }

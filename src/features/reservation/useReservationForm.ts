@@ -7,7 +7,7 @@ import {
 } from "./schema";
 import { ROUTES } from "@/lib/constants";
 import { supabase } from "@/lib/supabase";
-import { formatDateTime } from "@/lib/utils/formatters";
+import { formatDateTime } from "@/lib/utils";
 import { toast } from "sonner";
 import { DATABASE } from "@/lib/constants/database";
 import { useNavigate } from "react-router";
@@ -85,7 +85,11 @@ export const useReservationForm = (
         state: {
           fullName: data.fullName,
           phone: data.phone,
-          submittedAt: formatDateTime(new Date(), { calendar: "persian" }), // 'calenar' should chnage automatically based on lang-switch (en/fa)
+          submittedAt: formatDateTime(new Date(), {
+            style: "medium",
+            hour12: true,
+            calendar: "persian",
+          }), // 'calenar' should chnage automatically based on lang-switch (en/fa)
         },
       });
     }, 1500);

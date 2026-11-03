@@ -8,11 +8,11 @@ interface StatCardProps {
 
 const StatCard = ({ label, value, icon: Icon }: StatCardProps) => {
   return (
-    <div className="w-full shrink rounded-xl bg-white p-4 shadow-sm">
-      <div className="relative flex items-center gap-3">
+    <div className="w-full h-36 shrink rounded-xl bg-white p-7 shadow-sm">
+      <div className="relative flex items-center gap-5">
         {Icon && (
-          <div className="flex shrink-0 items-center justify-center rounded-lg bg-sage/70 p-2.5 text-dark-brown">
-            <Icon size={18} strokeWidth={2.25} />
+          <div className="flex shrink-0 items-center justify-center rounded-lg bg-sage/70 p-3 text-dark-brown">
+            <Icon size={20} strokeWidth={2.25} />
           </div>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
