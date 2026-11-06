@@ -1,18 +1,20 @@
 import { Calendar, DollarSign, FileQuestion, Users } from "lucide-react";
-import PendingRequestsBanner from "@/features/dashboard/admin/components/PendingRequestsBanner";
+import PendingRequestsBanner from "@/features/dashboard/admin/home/components/PendingRequestsBanner";
 import TodaysAppointment from "./components/TodaysAppointment";
 import StatCard from "./components/StatCard";
 import ViewAllButton from "@/components/shared/common/ViewAllButton";
 import { ROUTES } from "@/lib/constants";
 import CurrentDateTimeCard from "./components/CurrentDateTimeCard";
+import { useTranslation } from "react-i18next";
 
 const AdminHome = () => {
+  const { t } = useTranslation(["adminDashboard"]);
   return (
     <div>
-      <div className="flex flex-col gap-6">
-        
+      <div className="flex flex-col gap-5">
         <CurrentDateTimeCard />
 
+        {/* decide abt this part & add to locales */}
         <div className="grid grid-cols-2 gap-3">
           <StatCard label="Today's appointments" value={10} icon={Calendar} />
           <StatCard label="Budget" value="$234" icon={DollarSign} />
@@ -25,12 +27,12 @@ const AdminHome = () => {
         <div className="flex flex-col mt-5 gap-3">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl text-dark-brown font-extrabold">
-              Upcoming Appointments
+              {t("upcomingAppointments")}
             </h2>
             <ViewAllButton to={ROUTES.ADMIN.APPOINTMENTS} />
           </div>
 
-          <div className="flex flex-col shadow-md py-3 rounded-md">
+          <div className="flex flex-col py-3">
             <TodaysAppointment
               time="09:30"
               fullName="John Dow"

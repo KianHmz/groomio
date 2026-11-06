@@ -1,0 +1,5 @@
+{
+  "noRows": "No rows",
+  "oneRow": "{{count}} row",
+  "rows": "{{count}} rows"
+}

@@ -1,6 +1,7 @@
 {
   "status": {
     "ok": "Ok",
+    "cancel": "Cancel",
     "loading": "Loading...",
     "pleaseWait": "Please wait..."
   },
@@ -9,6 +10,8 @@
     "default": "Nothing to show here"
   },
   "actions": {
+    "new": "New",
+    "search": "Search",
     "back": "Back",
     "save": "Save",
     "delete": "Delete",

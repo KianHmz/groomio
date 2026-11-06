@@ -11,7 +11,7 @@ const Navigation = ({ variant }: NavigationProps) => {
   const { t } = useTranslation(["adminDashboard"]);
 
   return (
-    <nav className="safe-bottom fixed inset-x-0 bottom-0 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl flex justify-center gap-2 py-2 text-xs bg-white backdrop-blur">
+    <nav className="fixed inset-x-0 bottom-0 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl flex justify-center gap-2 py-3 text-xs bg-white backdrop-blur">
       {NAV_ITEMS[variant].map(({ key, icon: Icon, to }) => (
         <NavLink
           to={to}

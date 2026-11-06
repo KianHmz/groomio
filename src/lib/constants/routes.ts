@@ -6,7 +6,8 @@ export const ROUTES = {
   },
   AUTH: { LOGIN: "/login" },
   ADMIN: {
-    HOME: "/admin",
+    INDEX: "/admin",
+    HOME: "/admin/home",
     APPOINTMENTS: "/admin/appointments",
     CUSTOMERS: "/admin/customers",
   },

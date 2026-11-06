@@ -1,5 +1,5 @@
-import Header from "@/features/dashboard/components/Header";
-import Navigation from "@/features/dashboard/components/Navigation";
+import Header from "@/components/shared/layout/dashboard/components/Header";
+import Navigation from "@/components/shared/layout/dashboard/components/Navigation";
 import type { NavVariant } from "@/types";
 import { Outlet } from "react-router";
 

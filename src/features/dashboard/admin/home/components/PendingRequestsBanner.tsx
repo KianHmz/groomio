@@ -13,16 +13,16 @@ const PendingRequestsBanner = ({ count }: PendingRequestsBannerProps) => {
   return (
     <Link
       to={ROUTES.ADMIN.APPOINTMENTS}
-      className="bg-soft-tan/60 hover:bg-soft-tan transition rounded-xl px-5 py-3 w-full border border-tan/15"
+      className="bg-amber-300/40 hover:bg-amber-200/50 transition rounded-xl px-5 py-3 w-full border border-tan/15"
     >
       <div className="flex gap-4 items-center">
         <Clock size={22} className="text-tan mx-2" />
         <div className="text-dark-brown mx-2 flex-1">
           <p className="text-sm font-bold">
-            {t("adminDashboard:pendingRequests.title")}
+            {t("adminDashboard:PendingRequestsBanner.title")}
           </p>
           <p className="text-xs mt-1">
-            {t("pendingRequests.description", { count})}
+            {t("PendingRequestsBanner.description", { count})}
           </p>
         </div>
         <ChevronRight size={22} className="text-tan" />
