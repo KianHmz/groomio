@@ -4,7 +4,7 @@ import {
   reservationSchema,
   type ReservationFormInput,
   type ReservationFormOutput,
-} from "./schema";
+} from "@/lib/schema";
 import { ROUTES } from "@/lib/constants";
 import { supabase } from "@/lib/supabase";
 import { formatDateTime } from "@/lib/utils";

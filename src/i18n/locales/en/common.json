@@ -10,10 +10,13 @@
     "default": "Nothing to show here"
   },
   "actions": {
+    "approve": "Approve",
     "new": "New",
+    "edit": "Edit",
     "search": "Search",
     "back": "Back",
     "save": "Save",
+    "close": "Close",
     "delete": "Delete",
     "update": "Update",
     "insert": "Insert"

@@ -5,7 +5,7 @@ import Field from "@/components/shared/form/Field";
 import SectionHeader from "@/components/shared/form/SectionHeader";
 import TextareaInput from "@/components/shared/form/TextareaInput";
 
-import type { ReservationFormInput } from "../schema";
+import type { ReservationFormInput } from "../../../lib/schema";
 
 const NotesSection = () => {
   const { t } = useTranslation("reservation");

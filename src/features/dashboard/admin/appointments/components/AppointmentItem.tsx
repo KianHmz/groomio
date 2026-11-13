@@ -1,14 +1,44 @@
-interface AppointmentItemProps {
-  time: string;
-  fullName: string;
-  petName: string;
-  breed: string;
-  service: string[];
-}
+import { useTranslation } from "react-i18next";
+import type { AppointmentData } from "./modal/DetailModal";
+import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
 
-const AppointmentItem = ({ time, fullName, petName, breed, service }: AppointmentItemProps) => {
+type AppointmentItemProps = AppointmentData & {
+  onClick?: () => void;
+};
+
+const AppointmentItem = ({
+  time,
+  fullName,
+  name,
+  breed,
+  service,
+  combinedOptions,
+  onClick,
+}: AppointmentItemProps) => {
+  const { t } = useTranslation(["reservation"]);
+
+  const services =
+    service === "clipperCut"
+      ? [t("service.clipperCut.title")]
+      : combinedOptions.map((opt) => t(`service.combined.options.${opt}`));
+
   return (
-    <div className="flex items-center gap-8 w-full rounded-2xl bg-white/60 px-4 py-3 cursor-pointer">
+    <div
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
+      className="flex items-center gap-8 w-full rounded-2xl bg-white/60 px-4 py-3 cursor-pointer"
+    >
       <div className="flex shrink-0 flex-col items-center justify-center rounded-xl bg-cream px-4 py-3 shadow-inner">
         <span className="font-extrabold text-dark-brown w-10 text-center">
           {time}
@@ -16,21 +46,15 @@ const AppointmentItem = ({ time, fullName, petName, breed, service }: Appointmen
       </div>
 
       <div className="flex flex-1 flex-col gap-0.5 min-w-0">
-        <div className="flex items-center gap-1.5 font-bold text-dark-brown">
+        <div className="flex items-center gap-1.5 font-bold text-dark-brown text-sm">
           <span className="truncate">{fullName}</span>
           <span className="text-dark-brown/40">·</span>
-          <span className="truncate">{petName}</span>
+          <span className="truncate">{name}</span>
         </div>
         <span className="text-sm font-medium text-dark-brown/70">{breed}</span>
       </div>
 
-      <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs font-medium text-dark-brown/60">
-        {service.map((key) => (
-          <span key={key} className="rounded-md bg-tan/15 px-2 py-0.5">
-            {key}
-          </span>
-        ))}
-      </div>
+      <ServiceBadges service={services} />
     </div>
   );
 };

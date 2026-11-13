@@ -1,13 +1,8 @@
+import { COAT_CONDITIONS, COMBINED_OPTIONS, GENDERS, SERVICES, SIZES } from "@/lib/constants";
 import i18n from "@/i18n";
 import { z } from "zod";
 
 const { t } = i18n;
-
-const GENDERS = ["male", "female"] as const;
-const SIZES = ["small", "medium", "large"] as const;
-const SERVICES = ["haircutOnly", "combined"] as const;
-const COMBINED_OPTIONS = ["haircut", "bath", "deMatting"] as const;
-const COAT_CONDITIONS = ["none", "medium", "heavy", "felted"] as const;
 
 export const reservationSchema = z
   .object({

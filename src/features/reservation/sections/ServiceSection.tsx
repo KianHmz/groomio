@@ -1,13 +1,12 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import SectionHeader from "@/components/shared/form/SectionHeader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-import type { ReservationFormInput } from "../schema";
+import type { ReservationFormInput } from "@/lib/schema";
 import { useEffect } from "react";
+import { COMBINED_OPTIONS } from "@/lib/constants";
 
 const ServiceSection = () => {
   const { t } = useTranslation("reservation");
@@ -43,17 +42,17 @@ const ServiceSection = () => {
           >
             <label className="group relative flex cursor-pointer items-start gap-3 rounded-2xl border border-dark-brown/10 bg-white p-4 transition-all hover:border-tan/40 hover:bg-tan/2.5 has-checked:border-tan has-checked:bg-tan/6">
               <RadioGroupItem
-                value="haircutOnly"
+                value="clipperCut"
                 className="mt-0.5 border-dark-brown/20 text-tan"
               />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold text-dark-brown">
-                    {t("service.haircutOnly.title")}
+                    {t("service.clipperCut.title")}
                   </p>
                 </div>
                 <p className="mt-1 text-xs leading-relaxed text-red-800/50">
-                  {t("service.haircutOnly.note")}
+                  {t("service.clipperCut.note")}
                 </p>
               </div>
             </label>
@@ -77,7 +76,7 @@ const ServiceSection = () => {
                     control={control}
                     render={({ field }) => (
                       <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                        {(["haircut", "bath", "deMatting"] as const).map(
+                        {(COMBINED_OPTIONS).map(
                           (option) => {
                             const checked = field.value?.includes(option);
                             return (

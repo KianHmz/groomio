@@ -6,7 +6,7 @@ import Field from "@/components/shared/form/Field";
 import Input from "@/components/shared/form/Input";
 import SectionHeader from "@/components/shared/form/SectionHeader";
 
-import type { ReservationFormInput } from "../schema";
+import type { ReservationFormInput } from "../../../lib/schema";
 
 const OwnerDetailsSection = () => {
   const { t } = useTranslation("reservation");

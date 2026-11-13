@@ -5,6 +5,7 @@ import DayAppointments from "./components/DayAppointments";
 interface AdminAppointmentsProps {}
 
 const AdminAppointments = (props: AdminAppointmentsProps) => {
+
   return (
     <div className="flex flex-col flex-1 gap-8">
       <Header />

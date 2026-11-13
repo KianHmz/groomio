@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import type { ReservationFormInput } from "../schema";
+import type { ReservationFormInput } from "../../../lib/schema";
 
 const PetDetailsSection = () => {
   const { t } = useTranslation("reservation");

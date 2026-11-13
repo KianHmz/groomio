@@ -2,6 +2,18 @@
   "title": "Book a grooming appointment",
   "subtitle": "Tell us a little about your pet and we'll make sure they're ready for a comfortable grooming experience.",
 
+  "date": "Date",
+  "time": "Time",
+
+  "approveRequest": {
+    "title": "Approve request",
+    "description": "Set date and time"
+  },
+
+  "apppointmentDetail": {
+    "title": "Appointment Detail"
+  },
+
   "petDetails": {
     "title": "Pet details",
     "description": "Basic information about your pet",
@@ -38,9 +50,9 @@
   "service": {
     "title": "Service",
     "description": "Select the grooming option that suits your pet",
-    "haircutOnly": {
-      "title": "Haircut only",
-      "note": "NOTE: Please bathe your pet the same day or the night before."
+    "clipperCut": {
+      "title": "Clipper Cut",
+      "note": "NOTE: Bathing the animal before grooming is essential."
     },
     "combined": {
       "title": "Combined",
