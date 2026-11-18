@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
-import type { AppointmentData } from "./modal/DetailModal";
 import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
+import type { ReservationFormOutput } from "@/lib/schema";
+import { formatTime } from "@/lib/utils";
 
-type AppointmentItemProps = AppointmentData & {
+type AppointmentItemProps = ReservationFormOutput & {
   onClick?: () => void;
 };
 
@@ -41,7 +42,7 @@ const AppointmentItem = ({
     >
       <div className="flex shrink-0 flex-col items-center justify-center rounded-xl bg-cream px-4 py-3 shadow-inner">
         <span className="font-extrabold text-dark-brown w-10 text-center">
-          {time}
+          {formatTime(time)}
         </span>
       </div>
 

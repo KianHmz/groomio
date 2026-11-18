@@ -1,11 +1,9 @@
-import type { MouseEvent } from "react";
 import type { AppointmentData } from "./modal/DetailModal";
 import { useTranslation } from "react-i18next";
 import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
 
 type RequestItemProps = AppointmentData & {
   onClick?: () => void;
-  onApprove: (e: MouseEvent) => void;
 };
 
 const RequestItem = ({
@@ -15,7 +13,6 @@ const RequestItem = ({
   service,
   combinedOptions,
   onClick,
-  onApprove,
 }: RequestItemProps) => {
   const { t } = useTranslation(["reservation", "common"]);
 
@@ -34,7 +31,7 @@ const RequestItem = ({
           <span className="truncate">
             {fullName}&nbsp;·&nbsp;{name}
           </span>
-          <span className="text-xs font-medium text-dark-brown/70">
+          <span className="text-sm font-medium text-dark-brown/70">
             {breed}
           </span>
         </div>
@@ -42,7 +39,7 @@ const RequestItem = ({
         <ServiceBadges service={services} />
       </div>
 
-      <button
+      {/* <button
         onClick={(e) => {
           e.stopPropagation();
           onApprove(e);
@@ -51,7 +48,7 @@ const RequestItem = ({
         className="shrink-0 cursor-pointer rounded-xl bg-sage px-3 py-2 text-xs font-bold text-dark-brown transition-colors hover:bg-sage/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark-brown/30 active:scale-[0.98]"
       >
         {t("common:actions.approve")}
-      </button>
+      </button> */}
     </div>
   );
 };

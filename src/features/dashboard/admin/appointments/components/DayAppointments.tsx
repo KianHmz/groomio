@@ -3,12 +3,15 @@ import { useTranslation } from "react-i18next";
 import Badge from "./Badge";
 import DateNavigator from "./DateNavigator";
 import AppointmentItem from "./AppointmentItem";
-import DetailModal, { type AppointmentData } from "./modal/DetailModal";
+import DetailModal from "./modal/DetailModal";
+import type { ReservationFormOutput } from "@/lib/schema";
 
-const MOCK_APPOINTMENTS: AppointmentData[] = [
+interface DayAppointmentsProps {}
+
+const MOCK_APPOINTMENTS: ReservationFormOutput[] = [
   {
-    date: "Panjshanbeh, 21 Aban",
-    time: "09:30",
+    date: new Date(2025, 0, 3),       
+    time: new Date(2025, 0, 3, 11, 0),
     name: "Bella",
     breed: "Golden Retriever",
     age: "3 years",
@@ -23,8 +26,8 @@ const MOCK_APPOINTMENTS: AppointmentData[] = [
     notes: "Sensitive around ears — slow with clippers.",
   },
   {
-    date: "Panjshanbeh, 21 Aban",
-    time: "10:30",
+    date: new Date(2025, 0, 3),
+    time: new Date(2025, 0, 3, 17, 30),
     name: "Pinky",
     breed: "Husky",
     age: "1 month",
@@ -40,11 +43,20 @@ const MOCK_APPOINTMENTS: AppointmentData[] = [
   },
 ];
 
-const DayAppointments = () => {
+const DayAppointments = (props: DayAppointmentsProps) => {
   const { t } = useTranslation(["adminDashboard", "database", "reservation"]);
-  const [detailTarget, setDetailTarget] = useState<AppointmentData | null>(
-    null,
-  );
+
+  const [modal, setModal] = useState<ReservationFormOutput | null>(null);
+
+  const [modalMode, setModalMode] = useState<
+    "viewing" | "approving" | "editing"
+  >("viewing");
+
+  const handleEdit = () => {
+    setModalMode((m) =>
+      m === "viewing" ? "editing" : "viewing",
+    );
+  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -57,18 +69,17 @@ const DayAppointments = () => {
           <AppointmentItem
             key={`${appo.date}-${appo.time}-${appo.name}`}
             {...appo}
-            onClick={() => setDetailTarget(appo)}
+            onClick={() => setModal(appo)}
           />
         ))}
       </div>
 
       <DetailModal
-        open={!!detailTarget}
-        onClose={() => setDetailTarget(null)}
-        appointment={detailTarget}
-        onEdit={() => {
-          // open an edit modal with detailTarget, or reuse ApproveModal
-        }}
+        open={!!modal}
+        onOpenChange={(v) => !v && setModal(null)}
+        appointment={modal}
+        mode={modalMode}
+        onEdit={handleEdit}
       />
     </div>
   );

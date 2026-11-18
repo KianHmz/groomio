@@ -3,7 +3,6 @@ import RequestItem from "./RequestItem";
 import Badge from "./Badge";
 import DetailModal, { type AppointmentData } from "./modal/DetailModal";
 import { useState } from "react";
-import ApproveModal from "./modal/ApproveModal";
 
 interface PendingRequestsProps {}
 
@@ -46,12 +45,17 @@ const MOCK_REQUESTS: AppointmentData[] = [
 const PendingRequests = (props: PendingRequestsProps) => {
   const { t } = useTranslation(["adminDashboard", "database"]);
 
-  const [detailTarget, setDetailTarget] = useState<AppointmentData | null>(
-    null,
-  );
-  const [approveTarget, setApproveTarget] = useState<AppointmentData | null>(
-    null,
-  );
+  const [modal, setModal] = useState<AppointmentData | null>(null);
+
+  const [modalMode, setModalMode] = useState<
+    "viewing" | "approving" | "editing"
+  >("approving");
+
+  const handleEdit = () => {
+    setModalMode((m) =>
+      m === "editing" || m === "approving" ? "viewing" : "editing",
+    );
+  };
 
   return (
     <div className="flex flex-col">
@@ -67,32 +71,17 @@ const PendingRequests = (props: PendingRequestsProps) => {
           <RequestItem
             key={appo.name}
             {...appo}
-            onClick={() => setDetailTarget(appo)}
-            onApprove={(e) => {
-              e.stopPropagation();
-              setApproveTarget(appo);
-            }}
+            onClick={() => setModal(appo)}
           />
         ))}
       </div>
 
       <DetailModal
-        open={!!detailTarget}
-        onClose={() => setDetailTarget(null)}
-        appointment={detailTarget}
-        onEdit={() => {
-          // e.g. open an EditModal with detailTarget, or reuse ApproveModal
-        }}
-      />
-
-      <ApproveModal
-        open={!!approveTarget}
-        onClose={() => setApproveTarget(null)}
-        appointment={approveTarget}
-        onConfirm={(date, time) => {
-          // call your API / mutate the list here
-          console.log("approved", approveTarget?.name, date, time);
-        }}
+        open={!!modal}
+        onOpenChange={(v) => !v && setModal(null)}
+        appointment={modal}
+        mode={modalMode}
+        onEdit={handleEdit}
       />
     </div>
   );

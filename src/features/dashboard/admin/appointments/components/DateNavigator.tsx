@@ -13,8 +13,6 @@ interface DateNavigatorProps {}
 const DateNavigator = (props: DateNavigatorProps) => {
   const { t } = useTranslation(["common", "adminDashboard"]);
 
-  const datePickerRef = useRef<any>(null);
-
   const [date, setDate] = useDateObject(new Date());
   const today = new DateObject(dateObjectSetting);
   const isToday =
@@ -22,6 +20,7 @@ const DateNavigator = (props: DateNavigatorProps) => {
     date.month.number === today.month.number &&
     date.day === today.day;
 
+  const datePickerRef = useRef<any>(null);
   const openCalendar = () => {
     datePickerRef.current?.openCalendar();
   };
