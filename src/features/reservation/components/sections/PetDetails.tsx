@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SectionHeader from "@/components/shared/form/SectionHeader";
+import SectionHeader from "@/features/reservation/components/SectionHeader";
 import PetName from "@/components/shared/appointment/PetName";
 import PetBreed from "@/components/shared/appointment/PetBreed";
 import PetAge from "@/components/shared/appointment/PetAge";

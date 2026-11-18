@@ -15,7 +15,7 @@ const Notes = (props: NotesProps) => {
 
   return (
     <>
-      <Field label={t('notes.title')} error={errors.notes?.message}>
+      <Field label={t("notes.title")} error={errors.notes?.message}>
         <Textarea
           placeholder={t("notes.placeholder")}
           className="p-2 text-sm"

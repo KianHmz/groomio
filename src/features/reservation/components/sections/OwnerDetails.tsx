@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SectionHeader from "@/components/shared/form/SectionHeader";
+import SectionHeader from "@/features/reservation/components/SectionHeader";
 import OwnerFullName from "@/components/shared/appointment/OwnerFullName";
 import OwnerPhone from "@/components/shared/appointment/OwnerPhone";
 

@@ -1,15 +1,16 @@
 import { useTranslation } from "react-i18next";
 import RequestItem from "./RequestItem";
 import Badge from "./Badge";
-import DetailModal, { type AppointmentData } from "./modal/DetailModal";
+import DetailModal from "./modal/DetailModal";
 import { useState } from "react";
+import type { ReservationFormOutput } from "@/lib/schema";
 
 interface PendingRequestsProps {}
 
-const MOCK_REQUESTS: AppointmentData[] = [
+const MOCK_REQUESTS: ReservationFormOutput[] = [
   {
-    date: "",
-    time: "",
+    date: undefined,
+    time: undefined,
     name: "Sushi",
     breed: "shitzo",
     age: "4 months",
@@ -24,8 +25,8 @@ const MOCK_REQUESTS: AppointmentData[] = [
     notes: "Sensitive around ears — slow with clippers.",
   },
   {
-    date: "",
-    time: "",
+    date: undefined,
+    time: undefined,
     name: "Pooky",
     breed: "Pomer",
     age: "2 years",
@@ -45,7 +46,7 @@ const MOCK_REQUESTS: AppointmentData[] = [
 const PendingRequests = (props: PendingRequestsProps) => {
   const { t } = useTranslation(["adminDashboard", "database"]);
 
-  const [modal, setModal] = useState<AppointmentData | null>(null);
+  const [modal, setModal] = useState<ReservationFormOutput | null>(null);
 
   const [modalMode, setModalMode] = useState<
     "viewing" | "approving" | "editing"
@@ -82,6 +83,7 @@ const PendingRequests = (props: PendingRequestsProps) => {
         appointment={modal}
         mode={modalMode}
         onEdit={handleEdit}
+        onUpdate={() => {}}
       />
     </div>
   );

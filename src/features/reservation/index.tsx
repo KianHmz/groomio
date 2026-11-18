@@ -11,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PetDetails from "./sections/PetDetails";
-import OwnerDetails from "./sections/OwnerDetails";
-import Service from "./sections/ServiceDetails";
-import Notes from "./sections/NotesDetails";
+import PetDetails from "./components/sections/PetDetails";
+import OwnerDetails from "./components/sections/OwnerDetails";
+import Service from "./components/sections/ServiceDetails";
+import Notes from "./components/sections/NotesDetails";
 import BackButton from "@/components/shared/common/BackButton";
 
 const Reservation = () => {

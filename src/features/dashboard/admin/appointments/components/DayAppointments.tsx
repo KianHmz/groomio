@@ -80,6 +80,7 @@ const DayAppointments = (props: DayAppointmentsProps) => {
         appointment={modal}
         mode={modalMode}
         onEdit={handleEdit}
+        onUpdate={()=>{}}
       />
     </div>
   );

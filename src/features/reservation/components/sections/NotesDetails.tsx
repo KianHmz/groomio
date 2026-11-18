@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SectionHeader from "@/components/shared/form/SectionHeader";
+import SectionHeader from "@/features/reservation/components/SectionHeader";
 import Notes from "@/components/shared/appointment/Notes";
 
 interface NotesDetailsProps {}
