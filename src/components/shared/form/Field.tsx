@@ -10,17 +10,15 @@ interface FieldProps {
 }
 
 const Field = ({ label, children, hint, error }: FieldProps) => (
-  <div className="space-y-2">
-    <Label className="text-sm font-medium text-dark-brown">{label}</Label>
+  <div className="space-y-0.5">
+    <Label className="text-xs font-bold text-tan">{label}</Label>
 
     {children}
 
     {error ? (
       <InlineMessage type="error" message={error} className="text-xs" />
     ) : (
-      hint && (
-        <InlineMessage type="info" message={hint} className="text-xs" />
-      )
+      hint && <InlineMessage type="info" message={hint} className="text-xs" />
     )}
   </div>
 );

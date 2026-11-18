@@ -1,3 +1,5 @@
+export type DateInput = Date | number | string | null | undefined;
+
 export type CalendarSystem = "persian" | "gregory";
 
 export type DateFormatStyle = "numeric" | "short" | "medium" | "long" | "full";

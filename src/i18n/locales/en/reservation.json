@@ -2,8 +2,14 @@
   "title": "Book a grooming appointment",
   "subtitle": "Tell us a little about your pet and we'll make sure they're ready for a comfortable grooming experience.",
 
-  "date": "Date",
-  "time": "Time",
+  "DateTime": {
+    "date": "Date",
+    "datePlaceholder": "Select a date",
+    "time": "Time",
+    "timePlaceholder": "Select a time",
+    "hour": "Hour",
+    "minute": "Minute"
+  },
 
   "approveRequest": {
     "title": "Approve request",
@@ -22,7 +28,6 @@
     "breed": "Breed",
     "breedPlaceholder": "e.g. Golden Retriever",
     "age": "Age",
-    "ageHint": "An estimate is completely fine.",
     "agePlaceholder": "e.g. 2 years",
     "gender": "Gender",
     "male": "Male",
@@ -64,7 +69,7 @@
       }
     },
     "coatCondition": {
-      "label": "Coat condition",
+      "title": "Coat condition",
       "none": "No mats",
       "medium": "Medium matting",
       "heavy": "Heavy matting",
@@ -73,7 +78,7 @@
   },
 
   "notes": {
-    "title": "Anything else?",
+    "title": "Notes",
     "description": "Optional notes for the groomer",
     "placeholder": "Fears, allergies, injuries, preferences, or anything else we should know..."
   },

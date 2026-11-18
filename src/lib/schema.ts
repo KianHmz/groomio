@@ -1,4 +1,10 @@
-import { COAT_CONDITIONS, COMBINED_OPTIONS, GENDERS, SERVICES, SIZES } from "@/lib/constants";
+import {
+  COAT_CONDITIONS,
+  COMBINED_OPTIONS,
+  GENDERS,
+  SERVICES,
+  SIZES,
+} from "@/lib/constants";
 import i18n from "@/i18n";
 import { z } from "zod";
 
@@ -6,6 +12,29 @@ const { t } = i18n;
 
 export const reservationSchema = z
   .object({
+    // Date & Time
+    date: z
+      .date()
+      .nullable()
+      .optional()
+      .refine(
+        (d) => {
+          if (!d) return true;
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const picked = new Date(d);
+          picked.setHours(0, 0, 0, 0);
+          return picked >= today;
+        },
+        {
+          message: t("validation:date", {
+            field: t("reservation:DateTime.date"),
+          }),
+        },
+      ),
+
+    time: z.date().nullable().optional(),
+
     // Pet details
     name: z
       .string()
@@ -143,7 +172,7 @@ export const reservationSchema = z
 
     coatCondition: z.enum(COAT_CONDITIONS, {
       message: t("validation:requiredSelection", {
-        field: t("reservation:service.coatCondition.label"),
+        field: t("reservation:service.coatCondition.title"),
       }),
     }),
 

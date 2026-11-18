@@ -1,4 +1,9 @@
-import { STYLE_OPTIONS, type CalendarSystem, type DateFormatStyle } from "@/types/dateTime";
+import {
+  STYLE_OPTIONS,
+  type CalendarSystem,
+  type DateFormatStyle,
+  type DateInput,
+} from "@/types/dateTime";
 import { APP } from "@/lib/constants";
 
 export interface FormatDateOptions {
@@ -9,11 +14,15 @@ export interface FormatDateOptions {
   style?: DateFormatStyle;
 }
 
-const toValidDate = (date: Date | number | string): Date => {
+const toValidDate = (date: DateInput): Date | null => {
+  if (date == null) return null;
+
   const d = date instanceof Date ? date : new Date(date);
+
   if (Number.isNaN(d.getTime())) {
-    throw new Error(`Invalid date provided: ${String(date)}`);
+    return null;
   }
+
   return d;
 };
 
@@ -48,32 +57,40 @@ const buildFormatter = (
 };
 
 export const formatDate = (
-  date: Date | number | string = new Date(),
+  date: DateInput = new Date(),
   options: FormatDateOptions = {},
 ): string => {
   const d = toValidDate(date);
+  if (!d) return "";
+
   return buildFormatter(options).format(d);
 };
 
 export const formatDateTime = (
-  date: Date | number | string = new Date(),
+  date: DateInput = new Date(),
   options: Omit<FormatDateOptions, "withTime"> & {
     separator?: string;
   } = {},
 ): string => {
+  if (date == null) return "";
+
   const { separator = " · ", ...rest } = options;
 
-  const dateStr = formatDate(date, { ...rest, withTime: false });
+  const dateStr = formatDate(date, rest);
   const timeStr = formatTime(date, rest);
+
+  if (!dateStr || !timeStr) return "";
 
   return `${dateStr}${separator}${timeStr}`;
 };
 
 export const formatTime = (
-  date: Date | number | string = new Date(),
+  date: DateInput = new Date(),
   options: Pick<FormatDateOptions, "calendar" | "timeZone" | "hour12"> = {},
 ): string => {
   const d = toValidDate(date);
+  if (!d) return "";
+
   return new Intl.DateTimeFormat(APP.DEFAULT_LOCALE, {
     calendar: resolveCalendar(options.calendar),
     timeZone: resolveTimeZone(options.timeZone),
@@ -84,11 +101,14 @@ export const formatTime = (
 };
 
 export const formatRelativeTime = (
-  date: Date | number | string,
-  baseDate: Date | number | string = new Date(),
+  date: DateInput,
+  baseDate: DateInput = new Date(),
 ): string => {
   const target = toValidDate(date);
   const base = toValidDate(baseDate);
+
+  if (!target || !base) return "";
+
   const diffMs = target.getTime() - base.getTime();
   const diffSec = Math.round(diffMs / 1000);
 
@@ -108,5 +128,6 @@ export const formatRelativeTime = (
       return rtf.format(Math.round(diffSec / secondsInUnit), unit);
     }
   }
+
   return "now";
 };

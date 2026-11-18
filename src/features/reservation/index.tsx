@@ -1,6 +1,7 @@
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
+import { useReservationForm } from "@/hooks/useReservationForm";
+import { ROUTES } from "@/lib/constants";
 import MainButton from "@/components/shared/form/MainButton";
 import {
   Card,
@@ -10,14 +11,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import NotesSection from "./sections/NotesSection";
-import OwnerDetailsSection from "./sections/OwnerDetailsSection";
-import PetDetailsSection from "./sections/PetDetailsSection";
-import ServiceSection from "./sections/ServiceSection";
-import { useReservationForm } from "../../hooks/useReservationForm";
+import PetDetails from "./sections/PetDetails";
+import OwnerDetails from "./sections/OwnerDetails";
+import Service from "./sections/ServiceDetails";
+import Notes from "./sections/NotesDetails";
 import BackButton from "@/components/shared/common/BackButton";
-import { ROUTES } from "@/lib/constants";
 
 const Reservation = () => {
   const { t } = useTranslation(["reservation", "common"]);
@@ -49,10 +47,10 @@ const Reservation = () => {
             </CardHeader>
 
             <CardContent className="space-y-10 px-6">
-              <PetDetailsSection />
-              <OwnerDetailsSection />
-              <ServiceSection />
-              <NotesSection />
+              <PetDetails />
+              <OwnerDetails />
+              <Service />
+              <Notes />
             </CardContent>
 
             <CardFooter className="border-t border-dark-brown/8 bg-cream/30 py-8 mb-2">
