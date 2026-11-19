@@ -12,6 +12,7 @@ export interface FormatDateOptions {
   withTime?: boolean;
   hour12?: boolean;
   style?: DateFormatStyle;
+  locale?: string;
 }
 
 const toValidDate = (date: DateInput): Date | null => {

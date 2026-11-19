@@ -2,12 +2,17 @@ import {
   COAT_CONDITIONS,
   COMBINED_OPTIONS,
   GENDERS,
+  IRAN,
   SERVICES,
   SIZES,
 } from "@/lib/constants";
 import i18n from "@/i18n";
 import { z } from "zod";
-
+import {
+  getMaxBirthDate,
+  getMinBirthDate,
+  isTodayOrFuture,
+} from "@/lib/utils/validators";
 const { t } = i18n;
 
 export const reservationSchema = z
@@ -17,30 +22,23 @@ export const reservationSchema = z
       .date()
       .nullable()
       .optional()
-      .refine(
-        (d) => {
-          if (!d) return true;
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          const picked = new Date(d);
-          picked.setHours(0, 0, 0, 0);
-          return picked >= today;
-        },
-        {
-          message: t("validation:date", {
-            field: t("reservation:DateTime.date"),
-          }),
-        },
-      ),
+      .refine((date) => !date || isTodayOrFuture(date), {
+        message: t("validation:date", {
+          field: t("reservation:DateTime.date"),
+        }),
+      }),
 
     time: z.date().nullable().optional(),
 
     // Pet details
     name: z
       .string()
+      .trim()
       .min(
         1,
-        t("validation:required", { field: t("reservation:petDetails.name") }),
+        t("validation:required", {
+          field: t("reservation:petDetails.name"),
+        }),
       )
       .min(
         2,
@@ -59,9 +57,12 @@ export const reservationSchema = z
 
     breed: z
       .string()
+      .trim()
       .min(
         1,
-        t("validation:required", { field: t("reservation:petDetails.breed") }),
+        t("validation:required", {
+          field: t("reservation:petDetails.breed"),
+        }),
       )
       .min(
         2,
@@ -78,55 +79,68 @@ export const reservationSchema = z
         }),
       ),
 
-    age: z
-      .string()
+    birthDate: z.coerce
+      .date({
+        error: t("validation:date", {
+          field: t("reservation:petDetails.birthDate"),
+        }),
+      })
       .min(
-        1,
-        t("validation:minLength", {
-          field: t("reservation:petDetails.age"),
-          min: 1,
+        getMinBirthDate(),
+        t("validation:min", {
+          field: t("reservation:petDetails.birthDate"),
         }),
       )
       .max(
-        20,
-        t("validation:maxLength", {
-          field: t("reservation:petDetails.age"),
-          max: 20,
+        getMaxBirthDate(),
+        t("validation:max", {
+          field: t("reservation:petDetails.birthDate"),
         }),
       ),
 
     gender: z.enum(GENDERS, {
-      message: t("validation:requiredSelection", {
+      error: t("validation:requiredSelection", {
         field: t("reservation:petDetails.gender"),
       }),
     }),
 
     size: z.enum(SIZES, {
-      message: t("validation:requiredSelection", {
+      error: t("validation:requiredSelection", {
         field: t("reservation:petDetails.size"),
       }),
     }),
 
-    weight: z.coerce
-      .number({
-        message: t("validation:numeric", {
-          field: t("reservation:petDetails.weight"),
-        }),
-      })
-      .positive(
-        t("validation:positive", { field: t("reservation:petDetails.weight") }),
-      )
-      .max(
-        200,
-        t("validation:max", {
-          field: t("reservation:petDetails.weight"),
-          max: 200,
-        }),
-      ),
+    weight: z.preprocess(
+      (value) =>
+        typeof value === "string" && value.trim() === ""
+          ? undefined
+          : value === null || value === undefined
+            ? undefined
+            : value,
+      z.coerce
+        .number({
+          error: t("validation:numeric", {
+            field: t("reservation:petDetails.weight"),
+          }),
+        })
+        .positive(
+          t("validation:positive", {
+            field: t("reservation:petDetails.weight"),
+          }),
+        )
+        .max(
+          200,
+          t("validation:max", {
+            field: t("reservation:petDetails.weight"),
+            max: 200,
+          }),
+        ),
+    ),
 
     // Owner details
     fullName: z
       .string()
+      .trim()
       .min(
         1,
         t("validation:required", {
@@ -150,20 +164,21 @@ export const reservationSchema = z
 
     phone: z
       .string()
-      .min(
-        1,
-        t("validation:required", {
-          field: t("reservation:ownerDetails.phone"),
-        }),
+      .trim()
+      .transform((value) => value.replace(/\D/g, ""))
+      .pipe(
+        z.string().regex(
+          IRAN.regex,
+          t("validation:valid", {
+            field: t("reservation:ownerDetails.phone"),
+          }),
+        ),
       )
-      .regex(
-        /^(?:\+?98|0098|0)?9\d{9}$/, // fix later ...
-        t("validation:valid", { field: t("reservation:ownerDetails.phone") }),
-      ),
+      .transform((phone) => `${IRAN.code}${phone}`),
 
     // Service
     service: z.enum(SERVICES, {
-      message: t("validation:requiredSelection", {
+      error: t("validation:requiredSelection", {
         field: t("reservation:service.title"),
       }),
     }),
@@ -171,7 +186,7 @@ export const reservationSchema = z
     combinedOptions: z.array(z.enum(COMBINED_OPTIONS)).default([]),
 
     coatCondition: z.enum(COAT_CONDITIONS, {
-      message: t("validation:requiredSelection", {
+      error: t("validation:requiredSelection", {
         field: t("reservation:service.coatCondition.title"),
       }),
     }),
@@ -179,6 +194,7 @@ export const reservationSchema = z
     // Notes
     notes: z
       .string()
+      .trim()
       .max(
         500,
         t("validation:maxLength", {

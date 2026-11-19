@@ -15,3 +15,23 @@ export const phoneToE164 = (phone: string, country: Country): string => {
   }
   return `${country.code}${phone}`;
 };
+
+export const isTodayOrFuture = (date: Date): boolean => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const picked = new Date(date);
+  picked.setHours(0, 0, 0, 0);
+
+  return picked >= today;
+};
+
+export const getMinBirthDate = (): Date => {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - 25);
+  return d;
+};
+
+export const getMaxBirthDate = (): Date => {
+  return new Date();
+};

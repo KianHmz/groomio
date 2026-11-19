@@ -10,7 +10,7 @@ import Date from "@/components/shared/appointment/Date";
 import Time from "@/components/shared/appointment/Time";
 import { formatDate, formatTime } from "@/lib/utils";
 import PetBreed from "@/components/shared/appointment/PetBreed";
-import PetAge from "@/components/shared/appointment/PetAge";
+import PetBirthDate from "@/components/shared/appointment/PetBirthDate";
 import PetGender from "@/components/shared/appointment/PetGender";
 import PetSize from "@/components/shared/appointment/PetSize";
 import PetWeight from "@/components/shared/appointment/PetWeight";
@@ -95,9 +95,12 @@ const DetailModal = ({
                 )}
 
                 {isEditing ? (
-                  <PetAge />
+                  <PetBirthDate />
                 ) : (
-                  <Field label={t("petDetails.age")}>{appointment.age}</Field>
+                  <Field label={t("petDetails.birthDate")}>
+                    {" "}
+                    {formatDate(appointment.birthDate)}
+                  </Field>
                 )}
 
                 {isEditing ? (

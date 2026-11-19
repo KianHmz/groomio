@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import SectionHeader from "@/features/reservation/components/SectionHeader";
 import PetName from "@/components/shared/appointment/PetName";
 import PetBreed from "@/components/shared/appointment/PetBreed";
-import PetAge from "@/components/shared/appointment/PetAge";
+import PetAge from "@/components/shared/appointment/PetBirthDate";
 import PetGender from "@/components/shared/appointment/PetGender";
 import PetSize from "@/components/shared/appointment/PetSize";
 import PetWeight from "@/components/shared/appointment/PetWeight";

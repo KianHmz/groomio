@@ -16,36 +16,22 @@ import { useTranslation } from "react-i18next";
 export const useReservationForm = (
   defaultValues?: Partial<ReservationFormInput>,
 ) => {
-  const { t } = useTranslation(["reservation"]);
+  const { t, i18n } = useTranslation(["reservation"]);
   const navigate = useNavigate();
 
   const methods = useForm<ReservationFormInput, unknown, ReservationFormOutput>(
     {
+      // MOCK
       resolver: zodResolver(reservationSchema),
       mode: "onBlur",
       reValidateMode: "onChange",
-      // defaultValues: {
-      //   name: "",
-      //   breed: "",
-      //   age: "",
-      //   gender: undefined,
-      //   size: undefined,
-      //   weight: undefined,
-      //   fullName: "",
-      //   phone: "",
-      //   service: undefined,
-      //   combinedOptions: [],
-      //   coatCondition: undefined,
-      //   notes: "",
-      //   ...defaultValues,
-      // },
       defaultValues: {
         name: "Ted",
         breed: "Poodle",
-        age: "2 years",
+        birthDate: new Date(2013, 0, 5),
         gender: "female",
         size: "medium",
-        weight: "4",
+        weight: 4,
         fullName: "Shahla Mahla",
         phone: "9174458790",
         service: undefined,
@@ -54,6 +40,24 @@ export const useReservationForm = (
         notes: "My dog is cute asf",
         ...defaultValues,
       },
+      //   resolver: zodResolver(schema),
+      // mode: "onBlur",
+      // reValidateMode: "onChange",
+      // defaultValues: {
+      //   name: "",
+      //   breed: "",
+      //   birthDate: undefined,
+      //   gender: "",
+      //   size: "",
+      //   weight: undefined,
+      //   fullName: "",
+      //   phone: "",
+      //   service: undefined,
+      //   combinedOptions: [],
+      //   coatCondition: "",
+      //   notes: "",
+      //   ...defaultValues,
+      // },
     },
   );
 
@@ -61,14 +65,14 @@ export const useReservationForm = (
     const { error } = await supabase.from("reservations").insert({
       pet_name: data.name,
       breed: data.breed,
-      age: data.age,
+      birthDate: data.birthDate,
       gender: data.gender,
       size: data.size,
       weight: data.weight,
       full_name: data.fullName,
       phone: data.phone,
       service: data.service,
-      combined_options: data.combinedOptions ?? [],
+      combined_options: data.combinedOptions,
       coat_condition: data.coatCondition,
       notes: data.notes,
     });
@@ -79,20 +83,20 @@ export const useReservationForm = (
     }
 
     toast.success(t("submitted"));
+
     methods.reset();
-    setTimeout(() => {
-      navigate(ROUTES.RESERVATION.CONFIRMATION, {
-        state: {
-          fullName: data.fullName,
-          phone: data.phone,
-          submittedAt: formatDateTime(new Date(), {
-            style: "medium",
-            hour12: true,
-            calendar: "persian",
-          }), // 'calenar' should chnage automatically based on lang-switch (en/fa)
-        },
-      });
-    }, 1500);
+
+    navigate(ROUTES.RESERVATION.CONFIRMATION, {
+      state: {
+        fullName: data.fullName,
+        phone: data.phone,
+        submittedAt: formatDateTime(new Date(), {
+          style: "medium",
+          hour12: true,
+          locale: i18n.language,
+        }),
+      },
+    });
   };
 
   return { methods, onSubmit };
