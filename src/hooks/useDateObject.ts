@@ -1,4 +1,3 @@
-// hooks/useDateObject.ts
 import { useState } from "react";
 import DateObject from "react-date-object";
 import persian from "react-date-object/calendars/persian";
