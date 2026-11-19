@@ -7,7 +7,7 @@ import Input from "@/components/shared/form/Input";
 interface PetWeightProps {}
 
 const PetWeight = (props: PetWeightProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     register,
     formState: { errors },
@@ -20,7 +20,6 @@ const PetWeight = (props: PetWeightProps) => {
           <Input
             type="number"
             step="0.1"
-            placeholder={t("petDetails.weightPlaceholder")}
             className="pr-12"
             {...register("weight")}
           />

@@ -4,15 +4,18 @@
     "appointments": "Appointments",
     "customers": "Customers"
   },
+
   "greeting": {
     "morning": "Good morning",
     "afternoon": "Good afternoon",
     "evening": "Good evening"
   },
+
   "PendingRequestsBanner": {
     "title": "Bookings need your attention",
     "description": "{{count}} requests are waiting for approval."
   },
+  
   "upcomingAppointments": "Upcoming Appointments",
   "goToToday": "Go to today",
   "pendingRequests": "Pending Requests"

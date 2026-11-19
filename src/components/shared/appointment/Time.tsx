@@ -13,31 +13,28 @@ import { dateObjectSetting } from "@/hooks";
 interface TimeProps {}
 
 const Time = (props: TimeProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     formState: { errors },
   } = useFormContext<ReservationFormInput>();
 
   return (
-    <Field label={t("DateTime.time")} error={errors.time?.message}>
+    <Field label={t("dateTime.time")} error={errors.time?.message}>
       <Controller
         name="time"
         control={control}
         render={({ field }) => (
           <DatePicker
             disableDayPicker
+            containerClassName="w-full"
             className="teal"
             format="HH:mm"
             plugins={[<TimePicker hideSeconds />]}
             value={field.value}
             onChange={field.onChange}
             render={
-              <Input
-                placeholder={t("DateTime.timePlaceholder")}
-                value={field.value ? String(field.value) : ""}
-                readOnly
-              />
+              <Input value={field.value ? String(field.value) : ""} readOnly />
             }
             {...dateObjectSetting}
           />

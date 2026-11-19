@@ -12,7 +12,7 @@ import { useMemo } from "react";
 interface DateProps {}
 
 const Date = (props: DateProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     formState: { errors },
@@ -21,22 +21,19 @@ const Date = (props: DateProps) => {
   const now = useMemo(() => new DateObject({ ...dateObjectSetting }), []);
 
   return (
-    <Field label={t("DateTime.date")} error={errors.date?.message}>
+    <Field label={t("dateTime.date")} error={errors.date?.message}>
       <Controller
         name="date"
         control={control}
         render={({ field }) => (
           <DatePicker
+            containerClassName="w-full"
             className="teal"
             minDate={now}
             value={field.value}
             onChange={field.onChange}
             render={
-              <Input
-                placeholder={t("DateTime.datePlaceholder")}
-                value={field.value ? String(field.value) : ""}
-                readOnly
-              />
+              <Input value={field.value ? String(field.value) : ""} readOnly />
             }
             {...dateObjectSetting}
           />

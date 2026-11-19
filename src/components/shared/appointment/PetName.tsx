@@ -7,7 +7,7 @@ import Input from "@/components/shared/form/Input";
 interface PetNameProps {}
 
 const PetName = (props: PetNameProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     register,
     formState: { errors },
@@ -16,10 +16,7 @@ const PetName = (props: PetNameProps) => {
   return (
     <>
       <Field label={t("petDetails.name")} error={errors.name?.message}>
-        <Input
-          placeholder={t("petDetails.namePlaceholder")}
-          {...register("name")}
-        />
+        <Input {...register("name")} />
       </Field>
     </>
   );

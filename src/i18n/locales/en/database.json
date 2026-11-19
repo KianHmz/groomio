@@ -1,5 +1,10 @@
 {
-  "noRows": "No rows",
   "oneRow": "{{count}} row",
-  "rows": "{{count}} rows"
+  "rows": "{{count}} rows",
+
+  "empty": {
+    "default": "Nothing to show here",
+    "noData": "No data available",
+    "noRows": "No rows"
+  }
 }

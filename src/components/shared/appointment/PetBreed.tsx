@@ -7,7 +7,7 @@ import Input from "@/components/shared/form/Input";
 interface PetBreedProps {}
 
 const PetBreed = (props: PetBreedProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     register,
     formState: { errors },
@@ -17,7 +17,6 @@ const PetBreed = (props: PetBreedProps) => {
     <>
       <Field label={t("petDetails.breed")} error={errors.breed?.message}>
         <Input
-          placeholder={t("petDetails.breedPlaceholder")}
           {...register("breed")}
         />
       </Field>

@@ -1,0 +1,53 @@
+{
+  "title": "Book a grooming appointment",
+  "subtitle": "Tell us a little about your pet and we'll make sure they're ready for a comfortable grooming experience.",
+
+  "DateTime": {
+    "dateHint": "Select a date",
+    "timeHint": "Select a time"
+  },
+
+  "apppointmentDetail": {
+    "title": "Appointment Detail"
+  },
+
+  "petDetails": {
+    "description": "Basic information about your pet",
+    "nameHint": "e.g. Teddy",
+    "breedHint": "e.g. Golden Retriever",
+    "birthDateHint": "Select a birth date",
+    "genderHint": "Select a gender",
+    "sizeHint": "Select a size",
+    "weightHint": "e.g. 6"
+  },
+
+  "ownerDetails": {
+    "description": "We'll use these details to contact you",
+    "fullNameHint": "Your full name",
+    "phone": "Phone",
+    "phoneHint": "Your phone"
+  },
+
+  "service": {
+    "description": "Select the grooming option that suits your pet",
+    "clipperCut": {
+      "note": "NOTE: Bathing the animal before grooming is essential."
+    },
+    "combined": {
+      "description": "A complete grooming session tailored to your pet."
+    }
+  },
+
+  "notes": {
+    "description": "Optional notes for the groomer",
+    "placeholder": "Fears, allergies, injuries, preferences, or anything else we should know..."
+  },
+
+  "submit": "Book appointment",
+
+  "confirmation": {
+    "thankYou": "Thank you, {{name}}",
+    "description": "Your reservation request has been received. We'll call you shortly to confirm the details.",
+    "makeAnother": "Make another reservation"
+  }
+}

@@ -1,8 +1,8 @@
-import type { AppointmentData } from "./modal/DetailModal";
 import { useTranslation } from "react-i18next";
 import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
+import type { ReservationFormOutput } from "@/lib/schema";
 
-type RequestItemProps = AppointmentData & {
+type RequestItemProps = ReservationFormOutput & {
   onClick?: () => void;
 };
 
@@ -14,12 +14,12 @@ const RequestItem = ({
   combinedOptions,
   onClick,
 }: RequestItemProps) => {
-  const { t } = useTranslation(["reservation", "common"]);
+  const { t } = useTranslation(["field"]);
 
   const services =
     service === "clipperCut"
-      ? [t("service.clipperCut.title")]
-      : combinedOptions.map((opt) => t(`service.combined.options.${opt}`));
+      ? [t("service.clipperCut")]
+      : combinedOptions.map((opt) => t(`service.combined.${opt}`));
 
   return (
     <div
@@ -29,7 +29,7 @@ const RequestItem = ({
       <div className="flex min-w-0 flex-1 justify-between gap-1">
         <div className="flex flex-col gap-1.5 text-sm font-bold text-dark-brown">
           <span className="truncate">
-            {fullName}&nbsp;·&nbsp;{name}
+            {fullName} - {name}
           </span>
           <span className="text-sm font-medium text-dark-brown/70">
             {breed}
@@ -38,17 +38,6 @@ const RequestItem = ({
 
         <ServiceBadges service={services} />
       </div>
-
-      {/* <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onApprove(e);
-        }}
-        aria-label={`Approve request for ${name}`}
-        className="shrink-0 cursor-pointer rounded-xl bg-sage px-3 py-2 text-xs font-bold text-dark-brown transition-colors hover:bg-sage/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark-brown/30 active:scale-[0.98]"
-      >
-        {t("common:actions.approve")}
-      </button> */}
     </div>
   );
 };

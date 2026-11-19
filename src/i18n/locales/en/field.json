@@ -1,0 +1,56 @@
+{
+  "dateTime": {
+    "dateTime": "Date and time",
+    "date": "Date",
+    "time": "Time",
+    "hour": "Hour",
+    "minute": "Minute"
+  },
+
+  "petDetails": {
+    "petDetails": "Pet details",
+    "name": "Name",
+    "breed": "Breed",
+    "birthDate": "Birth date",
+    "gender": {
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "size": {
+      "size": "Size",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    },
+    "weight": "Weight",
+    "weightUnit": "kg"
+  },
+
+  "ownerDetails": {
+    "ownerDetails": "Owner details",
+    "fullName": "Full name",
+    "phone": "Phone"
+  },
+
+  "service": {
+    "service": "Service",
+    "clipperCut": "Clipper Cut",
+    "combined": {
+      "combined": "Combined",
+      "haircut": "Haircut",
+      "bath": "Bath",
+      "deMatting": "De-matting"
+    }
+  },
+
+  "coatCondition": {
+    "coatCondition": "Coat condition",
+    "none": "No mats",
+    "medium": "Medium matting",
+    "heavy": "Heavy matting",
+    "felted": "Severe / felted"
+  },
+
+  "notes": "Notes"
+}

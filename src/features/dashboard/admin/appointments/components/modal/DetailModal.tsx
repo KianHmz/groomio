@@ -1,5 +1,5 @@
 import type { ReservationFormOutput } from "@/lib/schema";
-import { useReservationForm } from "@/hooks/useReservationForm";
+import { useReservationForm } from "@/hooks/useReservationForm-pre";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Section from "./Section";
@@ -19,8 +19,8 @@ import Service from "@/components/shared/appointment/Service";
 import CoatCondition from "@/components/shared/appointment/CoatCondition";
 import Notes from "@/components/shared/appointment/Notes";
 import AlertModal from "@/components/shared/common/AlertModal";
-import { Button } from "@/components/ui/button";
 import Modal from "@/components/shared/common/Modal";
+import GhostButton from "@/components/shared/form/GhostButton";
 
 interface DetailModalProps {
   open: boolean;
@@ -38,7 +38,7 @@ const DetailModal = ({
   mode = "viewing",
   onEdit,
 }: DetailModalProps) => {
-  const { t } = useTranslation(["reservation", "common"]);
+  const { t } = useTranslation(["field", "common"]);
 
   const { methods, onSubmit } = useReservationForm();
   const { handleSubmit } = methods;
@@ -49,9 +49,9 @@ const DetailModal = ({
 
   const services = appointment
     ? appointment.service === "clipperCut"
-      ? [t("service.clipperCut.title")]
-      : appointment.combinedOptions.map((opt) =>
-          t(`service.combined.options.${opt}`),
+      ? [t("service.clipperCut")]
+      : appointment.combinedOptions.map((option) =>
+          t(`service.combined.${option}`),
         )
     : [];
 
@@ -69,7 +69,7 @@ const DetailModal = ({
                 {isEditing || isApproving ? (
                   <Date />
                 ) : (
-                  <Field label={t("DateTime.date")}>
+                  <Field label={t("dateTime.date")}>
                     {formatDate(appointment.date)}
                   </Field>
                 )}
@@ -78,7 +78,7 @@ const DetailModal = ({
                 {isEditing || isApproving ? (
                   <Time />
                 ) : (
-                  <Field label={t("DateTime.time")}>
+                  <Field label={t("dateTime.time")}>
                     {formatTime(appointment.time)}
                   </Field>
                 )}
@@ -106,7 +106,7 @@ const DetailModal = ({
                 {isEditing ? (
                   <PetGender />
                 ) : (
-                  <Field label={t("petDetails.gender")}>
+                  <Field label={t("petDetails.gender.gender")}>
                     {appointment.gender}
                   </Field>
                 )}
@@ -114,7 +114,7 @@ const DetailModal = ({
                 {isEditing ? (
                   <PetSize />
                 ) : (
-                  <Field label={t("petDetails.size")}>{appointment.size}</Field>
+                  <Field label={t("petDetails.size.size")}>{appointment.size}</Field>
                 )}
 
                 {isEditing ? (
@@ -139,7 +139,7 @@ const DetailModal = ({
                 {isEditing ? (
                   <Service />
                 ) : (
-                  <Field label={t("service.title")}>
+                  <Field label={t("service.service")}>
                     <ServiceBadges service={services} />
                   </Field>
                 )}
@@ -149,7 +149,7 @@ const DetailModal = ({
                 {isEditing ? (
                   <CoatCondition />
                 ) : (
-                  <Field label={t("service.coatCondition.title")}>
+                  <Field label={t("coatCondition.coatCondition")}>
                     {appointment.coatCondition}
                   </Field>
                 )}
@@ -160,7 +160,7 @@ const DetailModal = ({
                 {isEditing ? (
                   <Notes />
                 ) : (
-                  <Field label={t("notes.title")}>{appointment.notes}</Field>
+                  <Field label={t("notes")}>{appointment.notes}</Field>
                 )}
               </Section>
             </form>
@@ -177,12 +177,12 @@ const DetailModal = ({
 
           <AlertModal
             triggerBtn={
-              <Button
-                className="flex-1 text-red-600 bg-transparent hover:bg-transparent hover:text-red-600/80"
+              <GhostButton
+                className="flex-1 text-red-600 hover:text-red-600/80"
                 onClick={() => {}}
               >
                 {t("common:actions.delete")}
-              </Button>
+              </GhostButton>
             }
             actionBtnTitle={t("common:actions.delete")}
             cancelBtnTitle={t("common:status.cancel")}

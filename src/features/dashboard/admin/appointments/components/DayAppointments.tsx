@@ -10,7 +10,7 @@ interface DayAppointmentsProps {}
 
 const MOCK_APPOINTMENTS: ReservationFormOutput[] = [
   {
-    date: new Date(2025, 0, 3),       
+    date: new Date(2025, 0, 3),
     time: new Date(2025, 0, 3, 11, 0),
     name: "Bella",
     breed: "Golden Retriever",
@@ -44,7 +44,7 @@ const MOCK_APPOINTMENTS: ReservationFormOutput[] = [
 ];
 
 const DayAppointments = (props: DayAppointmentsProps) => {
-  const { t } = useTranslation(["adminDashboard", "database", "reservation"]);
+  const { t } = useTranslation(["database"]);
 
   const [modal, setModal] = useState<ReservationFormOutput | null>(null);
 
@@ -53,16 +53,14 @@ const DayAppointments = (props: DayAppointmentsProps) => {
   >("viewing");
 
   const handleEdit = () => {
-    setModalMode((m) =>
-      m === "viewing" ? "editing" : "viewing",
-    );
+    setModalMode((m) => (m === "viewing" ? "editing" : "viewing"));
   };
 
   return (
     <div className="flex flex-col gap-2">
       <DateNavigator />
       <Badge className="self-end">
-        {t("database:rows", { count: MOCK_APPOINTMENTS.length })}
+        {t("rows", { count: MOCK_APPOINTMENTS.length })}
       </Badge>
       <div className="flex flex-col gap-1">
         {MOCK_APPOINTMENTS.map((appo) => (
@@ -80,7 +78,7 @@ const DayAppointments = (props: DayAppointmentsProps) => {
         appointment={modal}
         mode={modalMode}
         onEdit={handleEdit}
-        onUpdate={()=>{}}
+        onUpdate={() => {}}
       />
     </div>
   );

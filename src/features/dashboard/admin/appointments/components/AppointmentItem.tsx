@@ -16,12 +16,12 @@ const AppointmentItem = ({
   combinedOptions,
   onClick,
 }: AppointmentItemProps) => {
-  const { t } = useTranslation(["reservation"]);
+  const { t } = useTranslation(["field"]);
 
   const services =
     service === "clipperCut"
-      ? [t("service.clipperCut.title")]
-      : combinedOptions.map((opt) => t(`service.combined.options.${opt}`));
+      ? [t("service.clipperCut")]
+      : combinedOptions.map((option) => t(`service.combined.${option}`));
 
   return (
     <div
@@ -48,9 +48,9 @@ const AppointmentItem = ({
 
       <div className="flex flex-1 flex-col gap-0.5 min-w-0">
         <div className="flex items-center gap-1.5 font-bold text-dark-brown text-sm">
-          <span className="truncate">{fullName}</span>
-          <span className="text-dark-brown/40">·</span>
-          <span className="truncate">{name}</span>
+          <span className="text-dark-brown">
+            {fullName} - {name}
+          </span>
         </div>
         <span className="text-sm font-medium text-dark-brown/70">{breed}</span>
       </div>

@@ -13,7 +13,7 @@ import { useMemo } from "react";
 interface PetBirthDateProps {}
 
 const PetBirthDate = (props: PetBirthDateProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     formState: { errors },
@@ -25,7 +25,7 @@ const PetBirthDate = (props: PetBirthDateProps) => {
   );
 
   const maxDate = useMemo(
-    () => new DateObject({ ...dateObjectSetting, date: new Date() }),
+    () => new DateObject({ ...dateObjectSetting, date: getMaxBirthDate() }),
     [],
   );
 
@@ -36,6 +36,7 @@ const PetBirthDate = (props: PetBirthDateProps) => {
         control={control}
         render={({ field }) => (
           <DatePicker
+            containerClassName="w-full"
             className="teal"
             minDate={minDate}
             maxDate={maxDate}

@@ -24,7 +24,7 @@ export const reservationSchema = z
       .optional()
       .refine((date) => !date || isTodayOrFuture(date), {
         message: t("validation:date", {
-          field: t("reservation:DateTime.date"),
+          field: t("field:dateTime.date"),
         }),
       }),
 
@@ -37,20 +37,20 @@ export const reservationSchema = z
       .min(
         1,
         t("validation:required", {
-          field: t("reservation:petDetails.name"),
+          field: t("field:petDetails.name"),
         }),
       )
       .min(
         2,
         t("validation:minLength", {
-          field: t("reservation:petDetails.name"),
+          field: t("field:petDetails.name"),
           min: 2,
         }),
       )
       .max(
         50,
         t("validation:maxLength", {
-          field: t("reservation:petDetails.name"),
+          field: t("field:petDetails.name"),
           max: 50,
         }),
       ),
@@ -61,20 +61,20 @@ export const reservationSchema = z
       .min(
         1,
         t("validation:required", {
-          field: t("reservation:petDetails.breed"),
+          field: t("field:petDetails.breed"),
         }),
       )
       .min(
         2,
         t("validation:minLength", {
-          field: t("reservation:petDetails.breed"),
+          field: t("field:petDetails.breed"),
           min: 2,
         }),
       )
       .max(
         50,
         t("validation:maxLength", {
-          field: t("reservation:petDetails.breed"),
+          field: t("field:petDetails.breed"),
           max: 50,
         }),
       ),
@@ -82,31 +82,31 @@ export const reservationSchema = z
     birthDate: z.coerce
       .date({
         error: t("validation:date", {
-          field: t("reservation:petDetails.birthDate"),
+          field: t("field:petDetails.birthDate"),
         }),
       })
       .min(
         getMinBirthDate(),
         t("validation:min", {
-          field: t("reservation:petDetails.birthDate"),
+          field: t("field:petDetails.birthDate"),
         }),
       )
       .max(
         getMaxBirthDate(),
         t("validation:max", {
-          field: t("reservation:petDetails.birthDate"),
+          field: t("field:petDetails.birthDate"),
         }),
       ),
 
     gender: z.enum(GENDERS, {
       error: t("validation:requiredSelection", {
-        field: t("reservation:petDetails.gender"),
+        field: t("field:petDetails.gender.gender"),
       }),
     }),
 
     size: z.enum(SIZES, {
       error: t("validation:requiredSelection", {
-        field: t("reservation:petDetails.size"),
+        field: t("field:petDetails.size.size"),
       }),
     }),
 
@@ -120,18 +120,18 @@ export const reservationSchema = z
       z.coerce
         .number({
           error: t("validation:numeric", {
-            field: t("reservation:petDetails.weight"),
+            field: t("field:petDetails.weight"),
           }),
         })
         .positive(
           t("validation:positive", {
-            field: t("reservation:petDetails.weight"),
+            field: t("field:petDetails.weight"),
           }),
         )
         .max(
           200,
           t("validation:max", {
-            field: t("reservation:petDetails.weight"),
+            field: t("field:petDetails.weight"),
             max: 200,
           }),
         ),
@@ -144,20 +144,20 @@ export const reservationSchema = z
       .min(
         1,
         t("validation:required", {
-          field: t("reservation:ownerDetails.fullName"),
+          field: t("field:ownerDetails.fullName"),
         }),
       )
       .min(
         3,
         t("validation:minLength", {
-          field: t("reservation:ownerDetails.fullName"),
+          field: t("field:ownerDetails.fullName"),
           min: 3,
         }),
       )
       .max(
         80,
         t("validation:maxLength", {
-          field: t("reservation:ownerDetails.fullName"),
+          field: t("field:ownerDetails.fullName"),
           max: 80,
         }),
       ),
@@ -170,7 +170,7 @@ export const reservationSchema = z
         z.string().regex(
           IRAN.regex,
           t("validation:valid", {
-            field: t("reservation:ownerDetails.phone"),
+            field: t("field:ownerDetails.phone"),
           }),
         ),
       )
@@ -179,15 +179,16 @@ export const reservationSchema = z
     // Service
     service: z.enum(SERVICES, {
       error: t("validation:requiredSelection", {
-        field: t("reservation:service.title"),
+        field: t("field:service.service"),
       }),
     }),
 
     combinedOptions: z.array(z.enum(COMBINED_OPTIONS)).default([]),
 
+    // Coat conition
     coatCondition: z.enum(COAT_CONDITIONS, {
       error: t("validation:requiredSelection", {
-        field: t("reservation:service.coatCondition.title"),
+        field: t("field:coatCondition.coatCondition"),
       }),
     }),
 
@@ -198,7 +199,7 @@ export const reservationSchema = z
       .max(
         500,
         t("validation:maxLength", {
-          field: t("reservation:notes.title"),
+          field: t("field:notes"),
           max: 500,
         }),
       )
@@ -210,7 +211,7 @@ export const reservationSchema = z
         code: "custom",
         path: ["combinedOptions"],
         message: t("validation:arrayMin", {
-          field: t("reservation:service.combined.title"),
+          field: t("field:service.combined.combined"),
           min: 1,
         }),
       });

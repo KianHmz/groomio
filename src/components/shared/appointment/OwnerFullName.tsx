@@ -7,7 +7,7 @@ import Input from "@/components/shared/form/Input";
 interface OwnerFullNameProps {}
 
 const OwnerFullName = (props: OwnerFullNameProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     register,
     formState: { errors },
@@ -20,7 +20,6 @@ const OwnerFullName = (props: OwnerFullNameProps) => {
         error={errors.fullName?.message}
       >
         <Input
-          placeholder={t("ownerDetails.fullNamePlaceholder")}
           {...register("fullName")}
         />
       </Field>

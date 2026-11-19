@@ -16,7 +16,7 @@ const Service = ({
   clipperCutDescription,
   combinedDescription,
 }: ServiceProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     watch,
@@ -32,7 +32,7 @@ const Service = ({
 
   return (
     <>
-      <Field label={t("service.title")} error={errors.service?.message}>
+      <Field label={t("service.service")} error={errors.service?.message}>
         <Controller
           name="service"
           control={control}
@@ -50,7 +50,7 @@ const Service = ({
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-semibold text-dark-brown">
-                      {t("service.clipperCut.title")}
+                      {t("service.clipperCut")}
                     </p>
                   </div>
                   <p className="mt-1 text-xs text-dark-brown/50">
@@ -67,7 +67,7 @@ const Service = ({
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-dark-brown">
-                      {t("service.combined.title")}
+                      {t("service.combined.combined")}
                     </p>
                     <p className="mt-1 text-xs text-dark-brown/50">
                       {combinedDescription}
@@ -100,7 +100,7 @@ const Service = ({
                                 }}
                                 className=""
                               />
-                              {t(`service.combined.options.${option}`)}
+                              {t(`service.combined.${option}`)}
                             </label>
                           );
                         })}

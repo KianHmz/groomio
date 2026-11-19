@@ -9,11 +9,12 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import { SIZES } from "@/lib/constants";
 
 interface PetSizeProps {}
 
 const PetSize = (props: PetSizeProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     formState: { errors },
@@ -21,7 +22,7 @@ const PetSize = (props: PetSizeProps) => {
 
   return (
     <>
-      <Field label={t("petDetails.size")} error={errors.size?.message}>
+      <Field label={t("petDetails.size.size")} error={errors.size?.message}>
         <Controller
           name="size"
           control={control}
@@ -31,19 +32,15 @@ const PetSize = (props: PetSizeProps) => {
               onValueChange={field.onChange}
             >
               <Select>
-                <SelectValue placeholder={t("petDetails.sizePlaceholder")} />
+                <SelectValue placeholder={t("petDetails.size.size")} />
               </Select>
 
               <SelectContent>
-                <SelectItem value="small">
-                  {t("petDetails.sizes.small")}
-                </SelectItem>
-                <SelectItem value="medium">
-                  {t("petDetails.sizes.medium")}
-                </SelectItem>
-                <SelectItem value="large">
-                  {t("petDetails.sizes.large")}
-                </SelectItem>
+                {SIZES.map((size) => (
+                  <SelectItem value={size}>
+                    {t(`petDetails.size.${size}`)}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </BaseSelect>
           )}

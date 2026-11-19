@@ -7,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 interface PetGenderProps {}
 
 const PetGender = (props: PetGenderProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(["field"]);
   const {
     control,
     formState: { errors },
@@ -15,7 +15,10 @@ const PetGender = (props: PetGenderProps) => {
 
   return (
     <>
-      <Field label={t("petDetails.gender")} error={errors.gender?.message}>
+      <Field
+        label={t("petDetails.gender.gender")}
+        error={errors.gender?.message}
+      >
         <Controller
           name="gender"
           control={control}
@@ -30,7 +33,7 @@ const PetGender = (props: PetGenderProps) => {
                   value="male"
                   className="border-dark-brown/20 text-tan"
                 />
-                {t("petDetails.male")}
+                {t("petDetails.gender.male")}
               </label>
 
               <label className="flex cursor-pointer items-center gap-2 text-sm text-dark-brown">
@@ -38,7 +41,7 @@ const PetGender = (props: PetGenderProps) => {
                   value="female"
                   className="border-dark-brown/20 text-tan"
                 />
-                {t("petDetails.female")}
+                {t("petDetails.gender.female")}
               </label>
             </RadioGroup>
           )}

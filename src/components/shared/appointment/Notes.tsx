@@ -7,7 +7,7 @@ import Textarea from "@/components/shared/form/Textarea";
 interface NotesProps {}
 
 const Notes = (props: NotesProps) => {
-  const { t } = useTranslation("reservation");
+  const { t } = useTranslation(['field']);
   const {
     register,
     formState: { errors },
@@ -15,9 +15,8 @@ const Notes = (props: NotesProps) => {
 
   return (
     <>
-      <Field label={t("notes.title")} error={errors.notes?.message}>
+      <Field label={t("notes")} error={errors.notes?.message}>
         <Textarea
-          placeholder={t("notes.placeholder")}
           className="p-2 text-sm"
           {...register("notes")}
         />

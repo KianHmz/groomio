@@ -9,17 +9,27 @@ import {
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 
 interface ModalProps extends ComponentProps<typeof Dialog> {
+  size?: string;
   triggerBtn?: ReactElement;
   title?: string;
   body?: ReactNode;
   footer?: ReactNode;
 }
 
-const Modal = ({ triggerBtn, title, body, footer, ...props }: ModalProps) => {
+const Modal = ({
+  size = "lg",
+  triggerBtn,
+  title,
+  body,
+  footer,
+  ...props
+}: ModalProps) => {
   return (
     <Dialog {...props}>
       {triggerBtn && <DialogTrigger render={triggerBtn} />}
-      <DialogContent className="flex flex-col gap-3 overflow-hidden p-1 text-dark-brown bg-cream max-w-lg! max-h-[90dvh] sm:max-h-[85dvh]">
+      <DialogContent
+        className={`flex flex-col gap-3 overflow-hidden p-1 text-dark-brown bg-cream max-w-${size}! max-h-[90dvh] sm:max-h-[85dvh]`}
+      >
         <DialogHeader className="pt-4 ps-4 shrink-0">
           <DialogTitle className="text-xl font-bold">{title}</DialogTitle>
         </DialogHeader>

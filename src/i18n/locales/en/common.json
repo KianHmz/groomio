@@ -5,13 +5,11 @@
     "loading": "Loading...",
     "pleaseWait": "Please wait..."
   },
-  "empty": {
-    "noData": "No data available",
-    "default": "Nothing to show here"
-  },
+
   "actions": {
     "approve": "Approve",
     "new": "New",
+    "clear": "Clear",
     "edit": "Edit",
     "search": "Search",
     "back": "Back",
@@ -19,13 +17,20 @@
     "close": "Close",
     "delete": "Delete",
     "update": "Update",
+    "add": "Add",
     "insert": "Insert"
   },
+
   "error": {
     "network": "Network error. Please check your connection.",
     "server": "Something went wrong. Please try again later.",
     "generic": "An unexpected error occurred.",
     "notFound": "Resource not found.",
     "unauthorized": "You are not authorized to perform this action."
+  },
+
+  "appointment": {
+    "submitted": "Appointment has been booked successfully.",
+    "failed": "Failed to book appointment. Please try again."
   }
 }
