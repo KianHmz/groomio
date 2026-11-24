@@ -7,8 +7,9 @@ import type { AppointmentFormOutput } from "@/lib/schema";
 
 interface PendingRequestsProps {}
 
-const MOCK_REQUESTS: AppointmentFormOutput[] = [
+const MOCK_REQUESTS: (AppointmentFormOutput & { id: string })[] = [
   {
+    id: "1",
     date: undefined,
     time: undefined,
     name: "Sushi",
@@ -25,6 +26,7 @@ const MOCK_REQUESTS: AppointmentFormOutput[] = [
     notes: "Sensitive around ears — slow with clippers.",
   },
   {
+    id: "2",
     date: undefined,
     time: undefined,
     name: "Pooky",
@@ -46,7 +48,9 @@ const MOCK_REQUESTS: AppointmentFormOutput[] = [
 const PendingRequests = (props: PendingRequestsProps) => {
   const { t } = useTranslation(["adminDashboard", "database"]);
 
-  const [modal, setModal] = useState<AppointmentFormOutput | null>(null);
+  const [modal, setModal] = useState<
+    (AppointmentFormOutput & { id: string }) | null
+  >(null);
 
   const [modalMode, setModalMode] = useState<
     "viewing" | "approving" | "editing"
@@ -56,6 +60,11 @@ const PendingRequests = (props: PendingRequestsProps) => {
     setModalMode((m) =>
       m === "editing" || m === "approving" ? "viewing" : "editing",
     );
+  };
+
+  const handleUpdate = () => {
+    setModal(null);
+    setModalMode("viewing");
   };
 
   return (
@@ -83,7 +92,8 @@ const PendingRequests = (props: PendingRequestsProps) => {
         appointment={modal}
         mode={modalMode}
         onEdit={handleEdit}
-        onUpdate={() => {}}
+        onUpdate={handleUpdate}
+        onCancel={() => setModalMode("viewing")}
       />
     </div>
   );

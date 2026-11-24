@@ -8,8 +8,9 @@ import type { AppointmentFormOutput } from "@/lib/schema";
 
 interface DayAppointmentsProps {}
 
-const MOCK_APPOINTMENTS: AppointmentFormOutput[] = [
+const MOCK_APPOINTMENTS: (AppointmentFormOutput & { id: string })[] = [
   {
+    id: "1",
     date: new Date(2025, 0, 3),
     time: new Date(2025, 0, 3, 11, 0),
     name: "Bella",
@@ -26,6 +27,7 @@ const MOCK_APPOINTMENTS: AppointmentFormOutput[] = [
     notes: "Sensitive around ears — slow with clippers.",
   },
   {
+    id: "2",
     date: new Date(2025, 0, 3),
     time: new Date(2025, 0, 3, 17, 30),
     name: "Pinky",
@@ -46,7 +48,9 @@ const MOCK_APPOINTMENTS: AppointmentFormOutput[] = [
 const DayAppointments = (props: DayAppointmentsProps) => {
   const { t } = useTranslation(["database"]);
 
-  const [modal, setModal] = useState<AppointmentFormOutput | null>(null);
+  const [modal, setModal] = useState<
+    (AppointmentFormOutput & { id: string }) | null
+  >(null);
 
   const [modalMode, setModalMode] = useState<
     "viewing" | "approving" | "editing"
@@ -54,6 +58,11 @@ const DayAppointments = (props: DayAppointmentsProps) => {
 
   const handleEdit = () => {
     setModalMode((m) => (m === "viewing" ? "editing" : "viewing"));
+  };
+
+  const handleUpdate = () => {
+    setModal(null);
+    setModalMode("viewing");
   };
 
   return (
@@ -78,7 +87,8 @@ const DayAppointments = (props: DayAppointmentsProps) => {
         appointment={modal}
         mode={modalMode}
         onEdit={handleEdit}
-        onUpdate={() => {}}
+        onUpdate={handleUpdate}
+        onCancel={() => setModalMode("viewing")}
       />
     </div>
   );

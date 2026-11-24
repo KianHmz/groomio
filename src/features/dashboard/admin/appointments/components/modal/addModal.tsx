@@ -1,4 +1,3 @@
-import { useReservationForm } from "@/hooks/useReservationForm";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Section from "./Section";
@@ -18,6 +17,11 @@ import Modal from "@/components/shared/common/Modal";
 import PetName from "@/components/shared/appointment/PetName";
 import OwnerFullName from "@/components/shared/appointment/OwnerFullName";
 import GhostButton from "@/components/shared/form/GhostButton";
+import { useCreateAppointment } from "@/hooks/useAppointment";
+import type { AppointmentFormOutput } from "@/lib/schema";
+import { toast } from "sonner";
+import { DB_ERRORS } from "@/lib/constants";
+import { useAppointmentForm } from "@/hooks/useAppointmentForm";
 
 interface AddModalProps {
   open: boolean;
@@ -25,14 +29,29 @@ interface AddModalProps {
 }
 
 const AddModal = ({ open, onOpenChange }: AddModalProps) => {
-  const { t } = useTranslation(["common", "adminAppointment", "field"]);
+  const { t } = useTranslation([
+    "common",
+    "adminAppointment",
+    "field",
+    "database",
+  ]);
 
-  const { methods, onSubmit } = useReservationForm();
-  const {
-    handleSubmit,
-    reset,
-    formState: { isSubmitting },
-  } = methods;
+  const methods = useAppointmentForm();
+
+  const { handleSubmit, reset } = methods;
+
+  const { mutateAsync, isPending } = useCreateAppointment();
+
+  const onSubmit = async (data: AppointmentFormOutput) => {
+    try {
+      await mutateAsync(data);
+      toast.success(t("database:status.created"));
+      reset();
+    } catch (error) {
+      toast.error(t("database:status.notCreated"));
+      throw new Error(DB_ERRORS.QUERY_FAILED, { cause: error });
+    }
+  };
 
   return (
     <Modal
@@ -44,12 +63,10 @@ const AddModal = ({ open, onOpenChange }: AddModalProps) => {
         <FormProvider {...methods}>
           <form id="add-appointment-form" onSubmit={handleSubmit(onSubmit)}>
             <Section>
-              {/* Date & Time */}
               <Date />
               <Time />
             </Section>
 
-            {/* Pet details */}
             <Section>
               <PetName />
               <PetBreed />
@@ -59,23 +76,19 @@ const AddModal = ({ open, onOpenChange }: AddModalProps) => {
               <PetWeight />
             </Section>
 
-            {/* Owner details */}
             <Section>
               <OwnerFullName />
               <OwnerPhone />
             </Section>
 
-            {/* Service */}
-            <Section>
+            <Section gridColsNum={1}>
               <Service />
             </Section>
 
-            {/* Coat condition */}
-            <Section>
+            <Section gridColsNum={1}>
               <CoatCondition />
             </Section>
 
-            {/* Notes */}
             <Section gridColsNum={1}>
               <Notes />
             </Section>
@@ -88,11 +101,16 @@ const AddModal = ({ open, onOpenChange }: AddModalProps) => {
             type="submit"
             form="add-appointment-form"
             className="flex-1"
-            disabled={isSubmitting}
+            disabled={isPending}
           >
-            {isSubmitting ? t("status.pleaseWait") : t("actions.add")}
+            {isPending ? t("status.pleaseWait") : t("actions.add")}
           </MainButton>
-          <GhostButton className="flex-1 " onClick={() => reset()}>
+
+          <GhostButton
+            className="flex-1"
+            disabled={isPending}
+            onClick={() => reset()}
+          >
             {t("actions.clear")}
           </GhostButton>
         </div>

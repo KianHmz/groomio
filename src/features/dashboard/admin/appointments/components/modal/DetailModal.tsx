@@ -1,14 +1,17 @@
-import type { AppointmentFormOutput } from "@/lib/schema";
-import { useReservationForm } from "@/hooks/useReservationForm";
+import { useEffect } from "react";
+import type { AppointmentFormInput, AppointmentFormOutput } from "@/lib/schema";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import { useAppointmentForm } from "@/hooks/useAppointmentForm";
+import { useUpdateAppointment } from "@/hooks/useAppointment";
 import Section from "./Section";
 import Field from "@/components/shared/form/Field";
 import MainButton from "@/components/shared/form/MainButton";
+import GhostButton from "@/components/shared/form/GhostButton";
 import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
 import Date from "@/components/shared/appointment/Date";
 import Time from "@/components/shared/appointment/Time";
-import { formatDate, formatTime } from "@/lib/utils";
 import PetBreed from "@/components/shared/appointment/PetBreed";
 import PetBirthDate from "@/components/shared/appointment/PetBirthDate";
 import PetGender from "@/components/shared/appointment/PetGender";
@@ -20,15 +23,17 @@ import CoatCondition from "@/components/shared/appointment/CoatCondition";
 import Notes from "@/components/shared/appointment/Notes";
 import AlertModal from "@/components/shared/common/AlertModal";
 import Modal from "@/components/shared/common/Modal";
-import GhostButton from "@/components/shared/form/GhostButton";
+import { formatDate, formatTime } from "@/lib/utils";
+import { DB_ERRORS } from "@/lib/constants";
 
 interface DetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  appointment: AppointmentFormOutput | null;
+  appointment: (AppointmentFormOutput & { id: string }) | null;
   mode?: "viewing" | "approving" | "editing";
   onEdit: () => void;
   onUpdate: () => void;
+  onCancel: () => void;
 }
 
 const DetailModal = ({
@@ -37,15 +42,40 @@ const DetailModal = ({
   appointment,
   mode = "viewing",
   onEdit,
+  onUpdate,
+  onCancel,
 }: DetailModalProps) => {
-  const { t } = useTranslation(["field", "common"]);
+  const { t } = useTranslation(["field", "common", "database"]);
 
-  const { methods, onSubmit } = useReservationForm();
-  const { handleSubmit } = methods;
+  const methods = useAppointmentForm();
+  const { handleSubmit, reset } = methods;
+
+  const { mutateAsync, isPending } = useUpdateAppointment();
+
+  useEffect(() => {
+    if (appointment && open) {
+      reset(appointment as unknown as AppointmentFormInput);
+    }
+  }, [appointment, open, reset]);
 
   const isViewing = mode === "viewing";
   const isEditing = mode === "editing";
   const isApproving = mode === "approving";
+
+  const onSubmit = async (data: AppointmentFormOutput) => {
+    if (!appointment) return;
+    try {
+      await mutateAsync({
+        id: appointment.id,
+        data,
+      });
+      toast.success(t("database:status.updated"));
+      onUpdate();
+    } catch (error) {
+      toast.error(t("database:status.notUpdated"));
+      throw new Error(DB_ERRORS.QUERY_FAILED, { cause: error });
+    }
+  };
 
   const services = appointment
     ? appointment.service === "clipperCut"
@@ -63,9 +93,12 @@ const DetailModal = ({
       body={
         appointment && (
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              id="appointment-detail-form"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              {/* Date & Time */}
               <Section>
-                {/* Date */}
                 {isEditing || isApproving ? (
                   <Date />
                 ) : (
@@ -74,7 +107,6 @@ const DetailModal = ({
                   </Field>
                 )}
 
-                {/* Time */}
                 {isEditing || isApproving ? (
                   <Time />
                 ) : (
@@ -98,7 +130,6 @@ const DetailModal = ({
                   <PetBirthDate />
                 ) : (
                   <Field label={t("petDetails.birthDate")}>
-                    {" "}
                     {formatDate(appointment.birthDate)}
                   </Field>
                 )}
@@ -114,7 +145,9 @@ const DetailModal = ({
                 {isEditing ? (
                   <PetSize />
                 ) : (
-                  <Field label={t("petDetails.size.size")}>{appointment.size}</Field>
+                  <Field label={t("petDetails.size.size")}>
+                    {appointment.size}
+                  </Field>
                 )}
 
                 {isEditing ? (
@@ -134,7 +167,7 @@ const DetailModal = ({
                 )}
               </Section>
 
-              {/* Service & Coat condition */}
+              {/* Service */}
               <Section gridColsNum={1}>
                 {isEditing ? (
                   <Service />
@@ -145,6 +178,7 @@ const DetailModal = ({
                 )}
               </Section>
 
+              {/* Coat condition */}
               <Section gridColsNum={1}>
                 {isEditing ? (
                   <CoatCondition />
@@ -169,25 +203,48 @@ const DetailModal = ({
       }
       footer={
         <div className="flex gap-3 w-full">
-          <MainButton className="flex-1" onClick={onEdit}>
-            {isViewing && t("common:actions.edit")}
-            {isEditing && t("common:actions.update")}
-            {isApproving && t("common:actions.approve")}
-          </MainButton>
+          {isViewing ? (
+            <MainButton className="flex-1" type="button" onClick={onEdit}>
+              {t("common:actions.edit")}
+            </MainButton>
+          ) : (
+            <MainButton
+              className="flex-1"
+              type="submit"
+              form="appointment-detail-form"
+              disabled={isPending}
+            >
+              {isPending
+                ? t("common:status.pleaseWait")
+                : isApproving
+                  ? t("common:actions.approve")
+                  : t("common:actions.update")}
+            </MainButton>
+          )}
 
-          <AlertModal
-            triggerBtn={
-              <GhostButton
-                className="flex-1 text-red-600 hover:text-red-600/80"
-                onClick={() => {}}
-              >
-                {t("common:actions.delete")}
-              </GhostButton>
-            }
-            actionBtnTitle={t("common:actions.delete")}
-            cancelBtnTitle={t("common:status.cancel")}
-            title={`${t("common:actions.delete")} ${appointment?.fullName} - ${appointment?.name}?`}
-          />
+          {isApproving || isEditing ? (
+            <GhostButton className="flex-1" onClick={onCancel}>
+              {t("common:actions.cancel")}
+            </GhostButton>
+          ) : (
+            ""
+          )}
+
+          {isViewing && (
+            <AlertModal
+              triggerBtn={
+                <GhostButton
+                  className="flex-1 text-red-600 hover:text-red-600/80"
+                  disabled={isPending}
+                >
+                  {t("common:actions.delete")}
+                </GhostButton>
+              }
+              actionBtnTitle={t("common:actions.delete")}
+              cancelBtnTitle={t("common:status.cancel")}
+              title={`${t("common:actions.delete")} ${appointment?.fullName} - ${appointment?.name}?`}
+            />
+          )}
         </div>
       }
     />
