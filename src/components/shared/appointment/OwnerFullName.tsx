@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { ReservationFormInput } from "@/lib/schema";
+import type { AppointmentFormInput } from "@/lib/schema";
 import { useFormContext } from "react-hook-form";
 import Field from "@/components/shared/form/Field";
 import Input from "@/components/shared/form/Input";
@@ -11,7 +11,7 @@ const OwnerFullName = (props: OwnerFullNameProps) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<ReservationFormInput>();
+  } = useFormContext<AppointmentFormInput>();
 
   return (
     <>

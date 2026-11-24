@@ -15,7 +15,7 @@ import {
 } from "@/lib/utils/validators";
 const { t } = i18n;
 
-export const reservationSchema = z
+export const appointmentSchema = z
   .object({
     // Date & Time
     date: z
@@ -218,5 +218,5 @@ export const reservationSchema = z
     }
   });
 
-export type ReservationFormInput = z.input<typeof reservationSchema>;
-export type ReservationFormOutput = z.output<typeof reservationSchema>;
+export type AppointmentFormInput = z.input<typeof appointmentSchema>;
+export type AppointmentFormOutput = z.output<typeof appointmentSchema>;

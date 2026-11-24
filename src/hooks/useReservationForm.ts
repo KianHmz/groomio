@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   reservationSchema,
-  type ReservationFormInput,
-  type ReservationFormOutput,
+  type AppointmentFormInput,
+  type AppointmentFormOutput,
 } from "@/lib/schema";
 import { ROUTES } from "@/lib/constants";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/supabase";
 import { formatDateTime } from "@/lib/utils";
 import { toast } from "sonner";
 import { DATABASE } from "@/lib/constants/database";
@@ -14,12 +14,12 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 export const useReservationForm = (
-  defaultValues?: Partial<ReservationFormInput>,
+  defaultValues?: Partial<AppointmentFormInput>,
 ) => {
-  const { t, i18n } = useTranslation(["reservation"]);
+  const { t, i18n } = useTranslation(["common"]);
   const navigate = useNavigate();
 
-  const methods = useForm<ReservationFormInput, unknown, ReservationFormOutput>(
+  const methods = useForm<AppointmentFormInput, unknown, AppointmentFormOutput>(
     {
       // MOCK
       resolver: zodResolver(reservationSchema),
@@ -61,28 +61,17 @@ export const useReservationForm = (
     },
   );
 
-  const onSubmit = async (data: ReservationFormOutput) => {
-    const { error } = await supabase.from("reservations").insert({
-      pet_name: data.name,
-      breed: data.breed,
-      birthDate: data.birthDate,
-      gender: data.gender,
-      size: data.size,
-      weight: data.weight,
-      full_name: data.fullName,
-      phone: data.phone,
-      service: data.service,
-      combined_options: data.combinedOptions,
-      coat_condition: data.coatCondition,
-      notes: data.notes,
+  const onSubmit = async (data: AppointmentFormOutput) => {
+    const { error } = await supabase.from("appointment").insert({
+      data
     });
 
     if (error) {
-      toast.error(t("failed"));
+      toast.error(t("appointment.failed"));
       throw new Error(DATABASE.CREATE_FAILED, { cause: error });
     }
 
-    toast.success(t("submitted"));
+    toast.success(t("appointment.submitted"));
 
     methods.reset();
 

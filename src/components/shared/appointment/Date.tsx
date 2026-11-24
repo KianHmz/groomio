@@ -1,4 +1,4 @@
-import type { ReservationFormInput } from "@/lib/schema";
+import type { AppointmentFormInput } from "@/lib/schema";
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Field from "@/components/shared/form/Field";
@@ -16,7 +16,7 @@ const Date = (props: DateProps) => {
   const {
     control,
     formState: { errors },
-  } = useFormContext<ReservationFormInput>();
+  } = useFormContext<AppointmentFormInput>();
 
   const now = useMemo(() => new DateObject({ ...dateObjectSetting }), []);
 

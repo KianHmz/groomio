@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import ServiceBadges from "@/features/dashboard/components/ServiceBadges";
-import type { ReservationFormOutput } from "@/lib/schema";
+import type { AppointmentFormOutput } from "@/lib/schema";
 
-type RequestItemProps = ReservationFormOutput & {
+type RequestItemProps = AppointmentFormOutput & {
   onClick?: () => void;
 };
 

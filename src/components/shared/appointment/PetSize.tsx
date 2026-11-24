@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { ReservationFormInput } from "@/lib/schema";
+import type { AppointmentFormInput } from "@/lib/schema";
 import { useFormContext, Controller } from "react-hook-form";
 import Field from "@/components/shared/form/Field";
 import Select from "@/components/shared/form/Select";
@@ -18,7 +18,7 @@ const PetSize = (props: PetSizeProps) => {
   const {
     control,
     formState: { errors },
-  } = useFormContext<ReservationFormInput>();
+  } = useFormContext<AppointmentFormInput>();
 
   return (
     <>

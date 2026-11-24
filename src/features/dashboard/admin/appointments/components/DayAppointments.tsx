@@ -4,11 +4,11 @@ import Badge from "./Badge";
 import DateNavigator from "./DateNavigator";
 import AppointmentItem from "./AppointmentItem";
 import DetailModal from "./modal/DetailModal";
-import type { ReservationFormOutput } from "@/lib/schema";
+import type { AppointmentFormOutput } from "@/lib/schema";
 
 interface DayAppointmentsProps {}
 
-const MOCK_APPOINTMENTS: ReservationFormOutput[] = [
+const MOCK_APPOINTMENTS: AppointmentFormOutput[] = [
   {
     date: new Date(2025, 0, 3),
     time: new Date(2025, 0, 3, 11, 0),
@@ -46,7 +46,7 @@ const MOCK_APPOINTMENTS: ReservationFormOutput[] = [
 const DayAppointments = (props: DayAppointmentsProps) => {
   const { t } = useTranslation(["database"]);
 
-  const [modal, setModal] = useState<ReservationFormOutput | null>(null);
+  const [modal, setModal] = useState<AppointmentFormOutput | null>(null);
 
   const [modalMode, setModalMode] = useState<
     "viewing" | "approving" | "editing"

@@ -1,6 +1,6 @@
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useReservationForm } from "@/hooks/useReservationForm-pre";
+import { useReservationForm } from "@/hooks/useReservationForm";
 import { ROUTES } from "@/lib/constants";
 import MainButton from "@/components/shared/form/MainButton";
 import {

@@ -1,6 +1,7 @@
 import type { NavItem, NavVariant } from "@/types";
 import { Calendar, Home, Users } from "lucide-react";
-import { ROUTES } from "./routes";
+import { ROUTES } from "@/lib/constants";
+
 
 export const NAV_ITEMS: Record<NavVariant, readonly NavItem[]> = {
   admin: [

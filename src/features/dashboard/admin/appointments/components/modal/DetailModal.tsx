@@ -1,5 +1,5 @@
-import type { ReservationFormOutput } from "@/lib/schema";
-import { useReservationForm } from "@/hooks/useReservationForm-pre";
+import type { AppointmentFormOutput } from "@/lib/schema";
+import { useReservationForm } from "@/hooks/useReservationForm";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Section from "./Section";
@@ -25,7 +25,7 @@ import GhostButton from "@/components/shared/form/GhostButton";
 interface DetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  appointment: ReservationFormOutput | null;
+  appointment: AppointmentFormOutput | null;
   mode?: "viewing" | "approving" | "editing";
   onEdit: () => void;
   onUpdate: () => void;

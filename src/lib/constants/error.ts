@@ -1,11 +1,7 @@
 // Auth
 export const AUTH_ERRORS = {
-  INVALID_CREDENTIALS: "Invalid email or password. Please try again.",
-  EMAIL_REQUIRED: "Email is required.",
-  PASSWORD_REQUIRED: "Password is required.",
-  EMAIL_INVALID: "Please enter a valid email address.",
-  PASSWORD_TOO_SHORT: "Password must be at least 8 characters.",
-  PASSWORD_MISMATCH: "Passwords do not match.",
+  INVALID_CREDENTIALS: "Invalid credentials. Please try again.",
+  INVALID_PHONE: "Please enter a valid phone number.",
   SESSION_EXPIRED: "Your session has expired. Please log in again.",
   UNAUTHORIZED: "You are not authorized to perform this action.",
   FORBIDDEN: "Access denied.",

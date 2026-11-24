@@ -1,4 +1,4 @@
-import type { ReservationFormInput } from "@/lib/schema";
+import type { AppointmentFormInput } from "@/lib/schema";
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Field from "@/components/shared/form/Field";
@@ -17,7 +17,7 @@ const Time = (props: TimeProps) => {
   const {
     control,
     formState: { errors },
-  } = useFormContext<ReservationFormInput>();
+  } = useFormContext<AppointmentFormInput>();
 
   return (
     <Field label={t("dateTime.time")} error={errors.time?.message}>

@@ -2,7 +2,7 @@ import MainButton from "@/components/shared/form/MainButton";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import AddModal from "./modal/addModal";
+import AddModal from "./modal/AddModal";
 
 interface HeaderProps {}
 

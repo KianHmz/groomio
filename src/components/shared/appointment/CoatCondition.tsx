@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { ReservationFormInput } from "@/lib/schema";
+import type { AppointmentFormInput } from "@/lib/schema";
 import { useFormContext, Controller } from "react-hook-form";
 import Field from "@/components/shared/form/Field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -12,7 +12,7 @@ const CoatCondition = (props: CoatConditionProps) => {
   const {
     control,
     formState: { errors },
-  } = useFormContext<ReservationFormInput>();
+  } = useFormContext<AppointmentFormInput>();
 
   return (
     <>

@@ -3,11 +3,11 @@ import RequestItem from "./RequestItem";
 import Badge from "./Badge";
 import DetailModal from "./modal/DetailModal";
 import { useState } from "react";
-import type { ReservationFormOutput } from "@/lib/schema";
+import type { AppointmentFormOutput } from "@/lib/schema";
 
 interface PendingRequestsProps {}
 
-const MOCK_REQUESTS: ReservationFormOutput[] = [
+const MOCK_REQUESTS: AppointmentFormOutput[] = [
   {
     date: undefined,
     time: undefined,
@@ -46,7 +46,7 @@ const MOCK_REQUESTS: ReservationFormOutput[] = [
 const PendingRequests = (props: PendingRequestsProps) => {
   const { t } = useTranslation(["adminDashboard", "database"]);
 
-  const [modal, setModal] = useState<ReservationFormOutput | null>(null);
+  const [modal, setModal] = useState<AppointmentFormOutput | null>(null);
 
   const [modalMode, setModalMode] = useState<
     "viewing" | "approving" | "editing"
