@@ -5,3 +5,5 @@ export * from "./appointment";
 export * from "./phone";
 export * from "./error";
 export * from "./table";
+export * from "./queryConfig";
+export * from "./queryKey";
