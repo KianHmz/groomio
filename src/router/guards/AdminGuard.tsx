@@ -8,11 +8,8 @@ export const AdminGuard = () => {
 
   if (isLoading) return <FullPageSpinner />;
 
-  if (!user) return <Navigate to={ROUTES.AUTH.LOGIN} replace />;
-
-  //   if (!user?.isAdmin) return <Navigate to={ROUTES.LANDING} replace />;
-  //   OR
-  //   if (user.role !== "admin") return <Navigate to={ROUTES.LANDING} replace />;
+  if (!user || user.role !== "admin")
+    return <Navigate to={ROUTES.AUTH} replace />;
 
   return <Outlet />;
 };

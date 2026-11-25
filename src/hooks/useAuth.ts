@@ -1,3 +1,7 @@
 export const useAuth = () => {
-  return { isLoading: false, isAuthenticated: false, user: { name: "sb" } };
+  return {
+    isLoading: false,
+    isAuthenticated: false,
+    user: { name: "sb", role: "admin" },
+  };
 };

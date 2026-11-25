@@ -1,6 +1,5 @@
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useReservationForm } from "@/hooks/useReservationForm";
 import { ROUTES } from "@/lib/constants";
 import MainButton from "@/components/shared/form/MainButton";
 import {
@@ -16,15 +15,17 @@ import OwnerDetails from "./components/sections/OwnerDetails";
 import Service from "./components/sections/ServiceDetails";
 import Notes from "./components/sections/NotesDetails";
 import BackButton from "@/components/shared/common/BackButton";
+import { useAppointmentForm } from "@/hooks/useAppointmentForm";
+import type { AppointmentFormOutput } from "@/lib/schema";
 
 const Reservation = () => {
   const { t } = useTranslation(["reservation", "common"]);
 
-  const { methods, onSubmit } = useReservationForm();
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  const methods = useAppointmentForm();
+
+  const { handleSubmit, reset } = methods;
+
+  const onSubmit = async (data: AppointmentFormOutput) => {};
 
   return (
     <div className="p-4">
@@ -56,10 +57,9 @@ const Reservation = () => {
             <CardFooter className="border-t border-dark-brown/8 bg-cream/30 py-8 mb-2">
               <MainButton
                 type="submit"
-                disabled={isSubmitting}
                 className="h-12 w-full rounded-xl"
               >
-                {isSubmitting ? t("common:status.pleaseWait") : t("submit")}
+               { t("submit")}
               </MainButton>
             </CardFooter>
           </Card>

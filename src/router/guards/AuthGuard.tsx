@@ -3,12 +3,15 @@ import { useAuth } from "@/hooks";
 import { ROUTES } from "@/lib/constants";
 import { Navigate, Outlet } from "react-router";
 
-export const LoginGuard = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+const AuthGuard = () => {
+  const { user, isLoading } = useAuth();
 
   if (isLoading) return <FullPageSpinner />;
 
-  if (!isAuthenticated) return <Navigate to={ROUTES.LOGIN} replace />;
+  if (!user)
+    return <Navigate to={ROUTES.AUTH} state={{ from: location }} replace />;
 
   return <Outlet />;
 };
+
+export default AuthGuard;

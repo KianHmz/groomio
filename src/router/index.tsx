@@ -5,6 +5,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
 import MainLayout from "@/components/shared/layout/MainLayout";
+import { authRoutes } from "./authRoutes";
 
 const Reservation = lazy(() => import("@/features/reservation"));
 const ReservationConfirmation = lazy(
@@ -16,18 +17,21 @@ export const router = createBrowserRouter([
     // public
     element: <MainLayout />,
     children: [
-      {
-        path: ROUTES.LANDING,
-        element: <Landing />,
-      },
-      {
-        path: ROUTES.RESERVATION.FORM,
-        element: <Reservation />,
-      },
-      {
-        path: ROUTES.RESERVATION.CONFIRMATION,
-        element: <ReservationConfirmation />,
-      },
+      // {
+      //   path: ROUTES.LANDING,
+      //   element: <Landing />,
+      // },
+      // {
+      //   path: ROUTES.RESERVATION.FORM,
+      //   element: <Reservation />,
+      // },
+      // {
+      //   path: ROUTES.RESERVATION.CONFIRMATION,
+      //   element: <ReservationConfirmation />,
+      // },
+
+      // guest
+      ...authRoutes,
 
       // admin
       ...adminRoutes,
@@ -38,7 +42,7 @@ export const router = createBrowserRouter([
       // *
       {
         path: "*",
-        element: <Navigate to={ROUTES.LANDING} replace />,
+        element: <Navigate to={ROUTES.AUTH} replace />,
       },
     ],
   },

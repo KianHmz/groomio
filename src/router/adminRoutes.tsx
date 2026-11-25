@@ -2,9 +2,9 @@ import { ROUTES } from "@/lib/constants";
 import { AdminGuard } from "./guards/AdminGuard";
 import { lazy } from "react";
 import DashboardLayout from "@/components/shared/layout/dashboard/DashboardLayout";
-import AdminAppointments from "@/features/dashboard/admin/appointments";
 
 const AdminHome = lazy(() => import("@/features/dashboard/admin/home"));
+const AdminAppointments = lazy(() => import("@/features/dashboard/admin/appointments"));
 
 export const adminRoutes = [
   {
