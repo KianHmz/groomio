@@ -205,6 +205,7 @@ export const appointmentSchema = z
       )
       .default(""),
   })
+
   .superRefine((data, ctx) => {
     if (data.service === "combined" && data.combinedOptions.length === 0) {
       ctx.addIssue({
