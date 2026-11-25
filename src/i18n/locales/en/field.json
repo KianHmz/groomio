@@ -52,5 +52,12 @@
     "felted": "Severe / felted"
   },
 
-  "notes": "Notes"
+  "notes": "Notes",
+
+  "status": {
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  }
 }
