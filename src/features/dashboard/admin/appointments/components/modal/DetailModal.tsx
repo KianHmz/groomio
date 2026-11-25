@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import type { AppointmentFormInput, AppointmentFormOutput } from "@/lib/schema";
+import type { AppointmentFormOutput } from "@/lib/schema";
+import { toAppointmentFormInput } from "@/lib/mappers/appointment";
 import { FormProvider } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -54,7 +55,7 @@ const DetailModal = ({
 
   useEffect(() => {
     if (appointment && open) {
-      reset(appointment as unknown as AppointmentFormInput);
+      reset(toAppointmentFormInput(appointment));
     }
   }, [appointment, open, reset]);
 

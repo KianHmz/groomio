@@ -1,4 +1,4 @@
-import type { AppointmentFormOutput } from "@/lib/schema";
+import type { AppointmentFormInput, AppointmentFormOutput } from "@/lib/schema";
 import { formatDate, formatTime } from "@/lib/utils";
 import type { AppointmentInsert, AppointmentUpdate } from "@/types";
 
@@ -63,4 +63,11 @@ export const toAppointmentUpdate = (
   }),
 
   ...(data.notes !== undefined && { notes: data.notes }),
+});
+
+export const toAppointmentFormInput = (
+  data: AppointmentFormOutput,
+): AppointmentFormInput => ({
+  ...data,
+  phone: data.phone.replace(/^\+98/, ""),
 });
